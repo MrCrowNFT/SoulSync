@@ -2,28 +2,40 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div className="sticky w-auto h-5 bg-[#6C9BCF] p-6 text-[#333333] font-mono">
-      <div>
+    <div className="sticky top-0 h-auto bg-[#6C9BCF] p-6 text-[#333333] font-mono">
+      <div className="flex items-center justify-between">
         {/*Logo */}
-        <img className="logo" loading="lazy" src="" alt="logo" />
-        {/*Nav */}
-        <nav>
-          <ul>
-            <li>
-              <Link to="">Home</Link>
-            </li>
-            <li>
-              <Link to="">Dashboard</Link>
-            </li>
-            <li>
-              <Link to="">Chatbot</Link>
-            </li>
-          </ul>
-        </nav>
+        <div className="flex items-center gap-3">
+          <img className="logo" loading="lazy" src="" alt="logo" />
+          {/*Nav */}
+          <nav>
+            <ul className="flex gap-3">
+              <li>
+                <Link to="" className="custom-link">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="" className="custom-link">
+                  Dashboard
+                </Link>
+              </li>
+              <li>
+                <Link to="" className="custom-link">
+                  Chatbot
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
         {/*Login Signup */}
-        <div>
-          <Link to=""></Link>
-          <Link to=""></Link>
+        <div className="flex justify-end space-x-4">
+          <Link to="" className="custom-link">
+            Login
+          </Link>
+          <Link to="" className="custom-link">
+            Signup
+          </Link>
         </div>
       </div>
     </div>
