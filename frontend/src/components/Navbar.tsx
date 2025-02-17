@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div>
+    <div className="sticky w-auto h-5 bg-[#6C9BCF] p-6 text-[#333333] font-mono">
       <div>
         {/*Logo */}
         <img className="logo" loading="lazy" src="" alt="logo" />
