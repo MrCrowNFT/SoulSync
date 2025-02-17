@@ -20,8 +20,6 @@ const Navbar = () => {
             </li>
           </ul>
         </nav>
-        {/*Social Media */}
-        <div></div>
         {/*Login Signup */}
         <div>
           <Link to=""></Link>

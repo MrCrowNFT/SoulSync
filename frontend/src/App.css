@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-.custom-a {
+.custom-link {
   @apply hover:text-[hsl(0,0%,15%)] transition-transform duration-300;
 }
 .social-media-img {

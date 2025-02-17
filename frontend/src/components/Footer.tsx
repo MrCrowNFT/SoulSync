@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <footer className="bg-[#6C9BCF] p-6 text-[#333333] font-mono">
@@ -8,16 +10,24 @@ const Footer = () => {
             <h3 className="text-[hsl(0,0%,15%)]">About</h3>
             <ul>
               <li>
-                <a href="custom-a">Random</a>
+                <Link to="" className="custom-link">
+                  Random
+                </Link>
               </li>
               <li>
-                <a href="custom-a">Random</a>
+                <Link to="" className="custom-link">
+                  Random
+                </Link>
               </li>
               <li>
-                <a href="custom-a">Random</a>
+                <Link to="" className="custom-link">
+                  Random
+                </Link>
               </li>
               <li>
-                <a href="custom-a">Random</a>
+                <Link to="" className="custom-link">
+                  Random
+                </Link>
               </li>
             </ul>
           </div>
@@ -25,16 +35,24 @@ const Footer = () => {
             <h3 className="text-[hsl(0,0%,15%)]">Privacy</h3>
             <ul>
               <li>
-                <a href="custom-a">Random</a>
+                <Link to="" className="custom-link">
+                  Random
+                </Link>
               </li>
               <li>
-                <a href="custom-a">Random</a>
+                <Link to="" className="custom-link">
+                  Random
+                </Link>
               </li>
               <li>
-                <a href="custom-a">Random</a>
+                <Link to="" className="custom-link">
+                  Random
+                </Link>
               </li>
               <li>
-                <a href="custom-a">Random</a>
+                <Link to="" className="custom-link">
+                  Random
+                </Link>
               </li>
             </ul>
           </div>
@@ -42,16 +60,24 @@ const Footer = () => {
             <h3>Terms of service</h3>
             <ul>
               <li>
-                <a href="custom-a">Random</a>
+                <Link to="" className="custom-link">
+                  Random
+                </Link>
               </li>
               <li>
-                <a href="custom-a">Random</a>
+                <Link to="" className="custom-link">
+                  Random
+                </Link>
               </li>
               <li>
-                <a href="custom-a">Random</a>
+                <Link to="" className="custom-link">
+                  Random
+                </Link>
               </li>
               <li>
-                <a href="custom-a">Random</a>
+                <Link to="" className="custom-link">
+                  Random
+                </Link>
               </li>
             </ul>
           </div>
@@ -59,16 +85,24 @@ const Footer = () => {
             <h3>Crisis resources</h3>
             <ul>
               <li>
-                <a href="custom-a">Random</a>
+                <Link to="" className="custom-link">
+                  Random
+                </Link>
               </li>
               <li>
-                <a href="custom-a">Random</a>
+                <Link to="" className="custom-link">
+                  Random
+                </Link>
               </li>
               <li>
-                <a href="custom-a">Random</a>
+                <Link to="" className="custom-link">
+                  Random
+                </Link>
               </li>
               <li>
-                <a href="custom-a">Random</a>
+                <Link to="" className="custom-link">
+                  Random
+                </Link>
               </li>
             </ul>
           </div>
