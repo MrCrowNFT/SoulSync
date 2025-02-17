@@ -196,7 +196,13 @@ Goal: Test the app, fix bugs, and deploy it.
 
 - Day 5-7: Final testing and polish.
 
-## Post-MVP: Mobile App (Optional)
+## Post-MVP: Mobile App 
 
 - React Native for Web: Reuse your React components in a React Native app.
 - Capacitor: Wrap your web app in a native mobile container.
+
+## Color Palet (Subject to change):
+- #6C9BCF
+- #A2D9A6
+- #333333 Text color
+- #F5F5F5 Background
