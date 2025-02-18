@@ -1,13 +1,5 @@
 import { FunctionComponent } from "react";
-
-type Testimony = {
-  photo: string;
-  opinion: string;
-};
-
-type TestimonyCardProps = {
-  testimony: Testimony;
-};
+import { TestimonyCardProps } from "../types/Testimony.ts";
 
 const TestimonyCard: FunctionComponent<TestimonyCardProps> = ({
   testimony,
@@ -22,6 +14,9 @@ const TestimonyCard: FunctionComponent<TestimonyCardProps> = ({
         />
       </div>
       <div>
+        <p>
+            <b>{testimony.username}</b>
+        </p>
         <p>
           <i>"{testimony.opinion}"</i>
         </p>

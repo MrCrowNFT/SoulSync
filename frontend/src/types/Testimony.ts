@@ -1,8 +1,10 @@
 export type Testimony = {
-    photo: string;
-    opinion: string;
-  };
-  
+  photo: string;
+  username: string;
+  opinion: string;
+};
+
 export type TestimonyCardProps = {
-    testimony: Testimony;
-  };
+  id: number;
+  testimony: Testimony;
+};
