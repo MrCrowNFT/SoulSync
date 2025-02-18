@@ -6,7 +6,7 @@ type TestimonyArray = TestimonyCardProps[];
 
 const TestimonySection: FunctionComponent<TestimonyArray> = (testimonies) => {
   return (
-    <div>
+    <div className="flex flex-col gap-1.5 justify-between flex-wrap">
       {testimonies.slice(0, 5).map((testimony) => (
         <TestimonyCard
           key={testimony.id}
