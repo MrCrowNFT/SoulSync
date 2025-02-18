@@ -13,12 +13,18 @@ const TestimonyCard: FunctionComponent<TestimonyCardProps> = ({
   testimony,
 }) => {
   return (
-    <div>
+    <div className="shadow-2xs rounded-xs flex justify-center flex-col">
       <div>
-        <img src={testimony.photo} alt="testimony photo" />
+        <img
+          src={testimony.photo}
+          alt="testimony photo"
+          className="rounded-4xl"
+        />
       </div>
       <div>
-        <p>{testimony.opinion}</p>
+        <p>
+          <i>"{testimony.opinion}"</i>
+        </p>
       </div>
     </div>
   );
