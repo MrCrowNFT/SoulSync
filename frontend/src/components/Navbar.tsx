@@ -5,7 +5,7 @@ const Navbar = () => {
     <div className="sticky top-0 h-auto bg-[#6C9BCF] p-6 text-[#333333] font-mono">
       <div className="flex items-center justify-between">
         {/*Logo */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-10">
           <img className="logo" loading="lazy" src="" alt="logo" />
           {/*Nav */}
           <nav>
