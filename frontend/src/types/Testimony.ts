@@ -8,3 +8,6 @@ export type TestimonyCardProps = {
   id: number;
   testimony: Testimony;
 };
+
+export type TestimonyArray = {
+  testimonies: TestimonyCardProps[]};
