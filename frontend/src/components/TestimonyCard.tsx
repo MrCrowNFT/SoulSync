@@ -5,19 +5,19 @@ const TestimonyCard: FunctionComponent<TestimonyCardProps> = ({
   testimony,
 }) => {
   return (
-    <div className="shadow-2xs rounded-xs flex justify-center flex-col">
-      <div>
+    <div className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center max-w-3xs">
+      <div className="mb-4">
         <img
           src={testimony.photo}
           alt="testimony photo"
-          className="rounded-4xl"
+          className="w-24 h-24 rounded-full object-cover shadow-md border-zinc-600"
         />
       </div>
-      <div>
-        <p>
-            <b>{testimony.username}</b>
+      <div className="text-center space-y-2">
+        <p className="font-bold text-lg text-gray-800">
+            {testimony.username}
         </p>
-        <p>
+        <p className="text-gray-600 italic">
           <i>"{testimony.opinion}"</i>
         </p>
       </div>

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const HeroSection = () => {
   return (
-    <div className="h-screen flex bg-cover bg-center justify-start items-center ">
+    <div className="h-screen flex bg-cover bg-center justify-start items-center  ">
       <div className=" font-mono space-y-4 p-20">
         <motion.h1
           initial={{ opacity: 0, y: -50 }}

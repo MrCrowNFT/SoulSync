@@ -9,7 +9,7 @@ const InfoSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="flex flex-col md:flex-row items-center justify-center gap-8"
+        className="flex flex-col md:flex-row items-center justify-center gap-8 mt-10"
       >
         <img
           src=""
@@ -32,7 +32,7 @@ const InfoSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="flex flex-col md:flex-row items-center justify-center gap-8"
+        className="flex flex-col md:flex-row items-center justify-center gap-8 mt-10"
       >
         <div className="max-w-md text-center md:text-left">
           <h2 className="text-2xl font-bold mb-4">Track your progress</h2>
@@ -56,7 +56,7 @@ const InfoSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.4 }}
-        className="flex flex-col md:flex-row items-center justify-center gap-8"
+        className="flex flex-col md:flex-row items-center justify-center gap-8 mt-10"
       >
         <img
           src="/path-to-your-image3.jpg"

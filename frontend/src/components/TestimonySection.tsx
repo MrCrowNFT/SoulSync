@@ -1,15 +1,11 @@
-import { TestimonyArray } from "../types/Testimony";
+import { TestimonySectionProps } from "../types/Testimony";
 import { FunctionComponent } from "react";
 import TestimonyCard from "./TestimonyCard";
 
-const TestimonySection: FunctionComponent<TestimonyArray> = (testimonies) => {
-  //need this because typescript just does not trust me
-  const testimoniesToShow = Array.isArray(testimonies)
-    ? testimonies.slice(0, 5)
-    : [];
+const TestimonySection: FunctionComponent<TestimonySectionProps> = ({testimonies}) => {
   return (
-    <div className="flex flex-col gap-1.5 justify-between flex-wrap">
-      {testimoniesToShow.slice(0, 5).map((testimony) => (
+    <div className="flex flex-row gap-4 justify-center flex-wrap p-4 mt-15">
+      {testimonies.map((testimony) => (
         <TestimonyCard
           key={testimony.id}
           id={testimony.id}

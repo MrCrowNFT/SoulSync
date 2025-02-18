@@ -9,5 +9,6 @@ export type TestimonyCardProps = {
   testimony: Testimony;
 };
 
-export type TestimonyArray = {
-  testimonies: TestimonyCardProps[]};
+export interface TestimonySectionProps {
+  testimonies: TestimonyCardProps[];
+}
