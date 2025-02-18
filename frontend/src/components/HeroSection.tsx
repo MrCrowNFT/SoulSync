@@ -6,7 +6,7 @@ const HeroSection = () => {
       <div className="text-white font-mono space-y-4">
         <h1 className="text-5xl font-bold">AI-Based Mental Health and Wellness Coach</h1>
         <p>personalized mental health support using AI chatbots, mood tracking, and therapy recommendations</p>
-        <button className="rounded-md bg-[hsl(212,51%,62%)] rounded-md shadow-md hover:bg-[hsl(212,51%,40%)] transition duration-300">
+        <button className="rounded-md bg-[hsl(212,51%,62%)] shadow-md hover:bg-[hsl(212,51%,40%)] transition duration-300">
           <Link to={"/signup"}>Sign Up</Link>
         </button>
       </div>
