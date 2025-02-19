@@ -10,15 +10,9 @@ import {
   Legend,
 } from "chart.js";
 import { FunctionComponent } from "react";
+import { LineProps } from "../types/Graph.ts";
 
-import type { ChartData, ChartOptions } from 'chart.js';
-
-interface LineProps{
-    options: ChartOptions<'line'>;
-    data: ChartData<'line'>;
-  }
-
-const MoodGraph: FunctionComponent<LineProps>  = (data) => {
+const MoodGraph: FunctionComponent<LineProps> = (data) => {
   Chart.register(
     CategoryScale,
     LinearScale,
