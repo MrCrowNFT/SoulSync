@@ -1,7 +1,6 @@
 import { FunctionComponent } from "react";
 import React, { useState, ChangeEvent } from "react";
 import { Camera } from "lucide-react";
-import { div } from "framer-motion/client";
 
 type UserProfile = {
   username: string;
@@ -39,18 +38,18 @@ const UserCard: FunctionComponent<UserProfile> = (user) => {
   };
 
   return (
-    <div>
+    <div className="flex items-center bg-white shadow-md rounded-lg p-4 max-w-3xl mx-auto">
       {/*Image Section */}
-      <div>
+      <div className="w-1/4 flex-shrink-0">
         {editMode ? (
-          <div>
+          <div className="relative">
             <img
               src={previewImage || user.photo}
               alt="user profile img"
-              className=""
+              className="w-full h-full rounded-full object-cove"
             />
-            <label>
-              <Camera />
+            <label className="absolute bottom-0 right-0 bg-gray-200 p-2 rounded-full cursor-pointer">
+              <Camera size={16} />
               <input
                 type="file"
                 className="hidden"
@@ -60,43 +59,54 @@ const UserCard: FunctionComponent<UserProfile> = (user) => {
             </label>
           </div>
         ) : (
-          <img src={user.photo} alt="user profile img" className="" />
+          <img
+            src={user.photo}
+            alt="user profile img"
+            className="w-full h-full rounded-full object-cover"
+          />
         )}
       </div>
 
       {/*Info Section */}
-      <form onSubmit={handleEditSubmit} className="">
-        <div className="">
+      <form onSubmit={handleEditSubmit} className="w-3/4 ml-4">
+        <div className="mb-2">
           {editMode ? (
             <input
               type="text"
               value={newUsername}
               onChange={(e) => setNewUsername(e.target.value)}
-              className=""
+              className="w-full border border-gray-300 rounded p-2"
             />
           ) : (
-            <h2 className="">{user.username}</h2>
+            <h2 className="text-xl font-bold">{user.username}</h2>
           )}
         </div>
-        <div className="">
+        <div className="mb-4">
           {editMode ? (
             <textarea
               value={newDescription}
               onChange={(e) => setNewDescription(e.target.value)}
-              className=""
+              className="w-full border border-gray-300 rounded p-2"
             />
           ) : (
-            <p className="">{user.description}</p>
+            <p className="text-gray-700">{user.description}</p>
           )}
         </div>
 
         <div className="">
           {editMode ? (
-            <button type="submit" className="">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+            >
               Save
             </button>
           ) : (
-            <button type="button" onClick={handleEditMode} className="">
+            <button
+              type="button"
+              onClick={handleEditMode}
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+            >
               Edit
             </button>
           )}
