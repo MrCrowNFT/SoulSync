@@ -10,9 +10,9 @@ import {
   Legend,
 } from "chart.js";
 import { FunctionComponent } from "react";
-import { LineProps } from "../types/Graph.ts";
+import { LineProp } from "../types/Graph.ts";
 
-const MoodGraph: FunctionComponent<LineProps> = (data) => {
+const MoodGraph: FunctionComponent<LineProp> = ({data}) => {
   Chart.register(
     CategoryScale,
     LinearScale,

@@ -1,6 +1,6 @@
-import type { LineProps } from "../types/Graph.ts";
+import type { LineData } from "../types/Graph.ts";
 
-export const moodGraphMock: LineProps = {
+export const moodGraphMock: LineData = {
   options: {
     responsive: true,
     plugins: {
