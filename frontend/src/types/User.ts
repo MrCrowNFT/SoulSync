@@ -3,3 +3,7 @@ export type UserProfile = {
   description: string; //subject to change
   photo: string;
 };
+
+export interface UserCardProps{
+  user: UserProfile;
+}

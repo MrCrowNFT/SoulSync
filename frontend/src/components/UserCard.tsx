@@ -1,9 +1,9 @@
 import { FunctionComponent } from "react";
 import React, { useState, ChangeEvent } from "react";
 import { Camera } from "lucide-react";
-import { UserProfile } from "../types/User.ts";
+import { UserCardProps } from "../types/User.ts";
 
-const UserCard: FunctionComponent<UserProfile> = (user) => {
+const UserCard: FunctionComponent<UserCardProps> = ({user}) => {
   const [editMode, setEditMode] = useState(false);
   const [newUsername, setNewUsername] = useState(user.username);
   const [newDescription, setNewDescription] = useState(user.description);
