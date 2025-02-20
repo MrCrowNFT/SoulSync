@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Instagram, Twitter, Facebook, Linkedin } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -6,7 +7,7 @@ const Footer = () => {
       <div className="m-3 space-y-6">
         {/*Grid */}
         <div className="grid grid-cols-4 gap-4">
-          <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-col justify-center items-center gap-1">
             <h3 className="text-[hsl(0,0%,10%)]">About</h3>
             <ul>
               <li>
@@ -31,7 +32,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-col justify-center items-center gap-1">
             <h3 className="text-[hsl(0,0%,10%)]">Privacy</h3>
             <ul>
               <li>
@@ -56,7 +57,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-col justify-center items-center gap-1">
             <h3 className="text-[hsl(0,0%,10%)]">Terms of service</h3>
             <ul>
               <li>
@@ -81,7 +82,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-col justify-center items-center gap-1">
             <h3 className="text-[hsl(0,0%,10%)]">Crisis resources</h3>
             <ul>
               <li>
@@ -116,7 +117,7 @@ const Footer = () => {
             rel="noreferrer"
             className="social-media-img"
           >
-            <img loading="lazy" src="" alt="" className="h-12 w-12" />
+            <Instagram />
           </a>
           <a
             href="#"
@@ -124,7 +125,7 @@ const Footer = () => {
             rel="noreferrer"
             className="social-media-img"
           >
-            <img loading="lazy" src="" alt="" className="h-12 w-12" />
+            <Twitter />
           </a>
           <a
             href="#"
@@ -132,7 +133,7 @@ const Footer = () => {
             rel="noreferrer"
             className="social-media-img"
           >
-            <img loading="lazy" src="" alt="" className="h-12 w-12" />
+            <Facebook />
           </a>
           <a
             href="#"
@@ -140,7 +141,7 @@ const Footer = () => {
             rel="noreferrer"
             className="social-media-img"
           >
-            <img loading="lazy" src="" alt="" className="h-12 w-12" />
+            <Linkedin />
           </a>
         </div>
         {/*Logo and trademark */}
