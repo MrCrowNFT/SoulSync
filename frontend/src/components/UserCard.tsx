@@ -15,12 +15,16 @@ const UserCard: FunctionComponent<UserCardProps> = ({ user }) => {
   };
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    //array-like object containing the files selected by the user,
+    // the "?" safely accesses files even if it's null/undefined and gets the first file "[0]"
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
+      //when finish reading file, set it as preview img
       reader.onloadend = () => {
         setPreviewImage(reader.result as string);
       };
+      //converts it to a base64 URL , when complete, it triggers the onloadend event
       reader.readAsDataURL(file);
     }
   };
