@@ -12,8 +12,10 @@ const Dashboard = () => {
     <>
       <Navbar />
       <UserCard user={mockUser} />
-      <MoodGraph data={moodGraphMock} />
-      <Assessment assessment={mockAssessmentData} />
+      <div className="flex">
+        <MoodGraph data={moodGraphMock} />
+        <Assessment assessment={mockAssessmentData} />
+      </div>
       <Footer />
     </>
   );

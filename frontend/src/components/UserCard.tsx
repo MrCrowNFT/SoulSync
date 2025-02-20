@@ -90,7 +90,7 @@ const UserCard: FunctionComponent<UserCardProps> = ({ user }) => {
             <div>
               <button
                 type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                className="bg-blue-500 font-mono text-white px-4 py-2 rounded hover:bg-blue-600 transition"
               >
                 Save
               </button>
@@ -100,16 +100,16 @@ const UserCard: FunctionComponent<UserCardProps> = ({ user }) => {
           // Display mode: just show the information and an "Edit" button.
           <div>
             <div className="mb-2">
-              <h2 className="text-xl font-bold">{user.username}</h2>
+              <h2 className="text-xl font-bold font-mono">{user.username}</h2>
             </div>
             <div className="mb-4">
-              <p className="text-gray-700">{user.description}</p>
+              <p className="text-gray-700 font-mono">{user.description}</p>
             </div>
             <div>
               <button
                 type="button"
                 onClick={handleEditMode}
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                className="bg-blue-500 font-mono text-white px-4 py-2 rounded hover:bg-blue-600 transition"
               >
                 Edit
               </button>

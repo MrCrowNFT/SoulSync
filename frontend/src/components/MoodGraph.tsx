@@ -24,7 +24,7 @@ const MoodGraph: FunctionComponent<LineProp> = ({ data }) => {
   );
 
   return (
-    <div className="w-full md:w-1/2 p-4 ml-10">
+    <div className="w-full md:w-1/2 p-4 ml-10 mr-10">
       <Line options={data.options} data={data.data}></Line>
     </div>
   );
