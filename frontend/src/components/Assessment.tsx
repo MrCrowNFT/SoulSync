@@ -1,8 +1,5 @@
 import { FunctionComponent } from "react";
-
-interface AssessmentProp {
-  assessment: string;
-}
+import { AssessmentProp } from "../types/Assesment";
 
 const Assessment: FunctionComponent<AssessmentProp> = ({ assessment }) => {
   return (
