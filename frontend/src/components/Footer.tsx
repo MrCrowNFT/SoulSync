@@ -110,38 +110,18 @@ const Footer = () => {
         </div>
         {/*Social media */}
         <div className="flex items-center justify-normal space-x-5">
-          <h2>Follow Us!</h2>
-          <a
-            href="#"
-            target="_blank"
-            rel="noreferrer"
-            className="social-media-img"
-          >
-            <Instagram />
+          <h2 className="my-auto self-center">Follow Us!</h2>
+          <a href="#" target="_blank" rel="noreferrer">
+            <Instagram className="social-media-img" />
           </a>
-          <a
-            href="#"
-            target="_blank"
-            rel="noreferrer"
-            className="social-media-img"
-          >
-            <Twitter />
+          <a href="#" target="_blank" rel="noreferrer">
+            <Twitter className="social-media-img" />
           </a>
-          <a
-            href="#"
-            target="_blank"
-            rel="noreferrer"
-            className="social-media-img"
-          >
-            <Facebook />
+          <a href="#" target="_blank" rel="noreferrer">
+            <Facebook className="social-media-img" />
           </a>
-          <a
-            href="#"
-            target="_blank"
-            rel="noreferrer"
-            className="social-media-img"
-          >
-            <Linkedin />
+          <a href="#" target="_blank" rel="noreferrer">
+            <Linkedin className="social-media-img" />
           </a>
         </div>
         {/*Logo and trademark */}
