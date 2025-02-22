@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import DarkModeToggle from "./DarkModeToggle";
 
 const Navbar = () => {
   return (
@@ -30,6 +31,7 @@ const Navbar = () => {
         </div>
         {/*Login Signup */}
         <div className="flex justify-end space-x-4 gap-6 mr-5">
+          <DarkModeToggle/>
           <Link to="/login" className="custom-link">
             Login
           </Link>
