@@ -8,7 +8,7 @@ import Signup from "./pages/Signup";
 
 function App() {
   return (
-    <>
+    <div className="bg-white dark:bg-gray-950 min-h-screen transition-colors duration-300">
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -16,7 +16,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
-    </>
+    </div>
   );
 }
 

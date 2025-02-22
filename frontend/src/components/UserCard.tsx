@@ -39,9 +39,9 @@ const UserCard: FunctionComponent<UserCardProps> = ({ user }) => {
   };
 
   return (
-    <div className="flex items-center bg-white shadow-md rounded-lg ml-10 mr-10 mb-10 p-4 max-w-5xl">
+    <div className="flex items-center mt-5 bg-white dark:bg-gray-800 rounded-lg ml-10 mr-10 mb-10 p-4  transition-colors duration-300">
       {/* Image Section */}
-      <div className="w-1/4 flex-shrink-0">
+      <div className="w-1/4 flex-shrink-0 ml-10">
         {editMode ? (
           <div className="relative">
             <img
@@ -49,8 +49,8 @@ const UserCard: FunctionComponent<UserCardProps> = ({ user }) => {
               alt="user profile img"
               className="w-full h-full rounded-full object-cover"
             />
-            <label className="absolute bottom-0 right-0 bg-gray-200 p-2 rounded-full cursor-pointer">
-              <Camera size={16} />
+            <label className="absolute bottom-0 right-0 bg-gray-200 dark:bg-gray-700 p-2 rounded-full cursor-pointer transition-colors duration-300">
+              <Camera size={16} className="text-gray-800 dark:text-gray-200" />
               <input
                 type="file"
                 className="hidden"
@@ -69,7 +69,7 @@ const UserCard: FunctionComponent<UserCardProps> = ({ user }) => {
       </div>
 
       {/* Info Section */}
-      <div className="w-3/4 ml-4">
+      <div className=" mr-10">
         {editMode ? (
           <form onSubmit={handleEditSubmit}>
             <div className="mb-2">
@@ -77,20 +77,20 @@ const UserCard: FunctionComponent<UserCardProps> = ({ user }) => {
                 type="text"
                 value={newUsername}
                 onChange={(e) => setNewUsername(e.target.value)}
-                className="w-full border border-gray-300 rounded p-2"
+                className="w-full border border-gray-300 dark:border-gray-600 rounded p-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors duration-300"
               />
             </div>
             <div className="mb-4">
               <textarea
                 value={newDescription}
                 onChange={(e) => setNewDescription(e.target.value)}
-                className="w-full border border-gray-300 rounded p-2"
+                className="w-full border border-gray-300 dark:border-gray-600 rounded p-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors duration-300"
               />
             </div>
             <div>
               <button
                 type="submit"
-                className="bg-blue-500 font-mono text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                className="bg-blue-500 dark:bg-blue-600 font-mono text-white px-4 py-2 rounded hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors duration-300"
               >
                 Save
               </button>
@@ -99,16 +99,20 @@ const UserCard: FunctionComponent<UserCardProps> = ({ user }) => {
         ) : (
           <div>
             <div className="mb-2">
-              <h2 className="text-xl font-bold font-mono">{user.username}</h2>
+              <h2 className="text-xl font-bold font-mono text-gray-900 dark:text-gray-100">
+                {user.username}
+              </h2>
             </div>
             <div className="mb-4">
-              <p className="text-gray-700 font-mono">{user.description}</p>
+              <p className="text-gray-700 dark:text-gray-300 font-mono">
+                {user.description}
+              </p>
             </div>
             <div>
               <button
                 type="button"
                 onClick={handleEditMode}
-                className="bg-blue-500 font-mono text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                className="bg-blue-500 dark:bg-blue-600 font-mono text-white px-4 py-2 rounded hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors duration-300"
               >
                 Edit
               </button>
