@@ -11,7 +11,7 @@ const Chat = () => {
   };
 
   return (
-    <div className="p-4 flex flex-col items-center max-w-md mx-auto bg-[#F5F5F5] rounded-lg shadow-md">
+    <div className="p-4 flex flex-col items-center max-w-md mx-auto bg-[#F5F5F5] rounded-lg ">
       {/* Messages Container */}
       <div className="border border-[#6C9BCF] h-96 w-full overflow-y-auto bg-white rounded-lg p-2 mb-4"></div>
 

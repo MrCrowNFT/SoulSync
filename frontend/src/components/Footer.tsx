@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="bg-[#6C9BCF] p-6 text-[#333333] font-mono h-auto mt-20">
       <div className="m-3 space-y-6">
         {/*Grid */}
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-4 mb-10">
           <div className="flex flex-col justify-center items-center gap-1">
             <h3 className="text-[hsl(0,0%,10%)]">About</h3>
             <ul>
