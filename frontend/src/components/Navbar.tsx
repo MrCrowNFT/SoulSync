@@ -21,7 +21,7 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link to="" className="custom-link">
+                <Link to="/chat" className="custom-link">
                   Chatbot
                 </Link>
               </li>
@@ -30,10 +30,10 @@ const Navbar = () => {
         </div>
         {/*Login Signup */}
         <div className="flex justify-end space-x-4">
-          <Link to="" className="custom-link">
+          <Link to="/login" className="custom-link">
             Login
           </Link>
-          <Link to="" className="custom-link">
+          <Link to="/signup" className="custom-link">
             Signup
           </Link>
         </div>
