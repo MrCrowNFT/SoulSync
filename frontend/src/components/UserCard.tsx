@@ -97,7 +97,6 @@ const UserCard: FunctionComponent<UserCardProps> = ({ user }) => {
             </div>
           </form>
         ) : (
-          // Display mode: just show the information and an "Edit" button.
           <div>
             <div className="mb-2">
               <h2 className="text-xl font-bold font-mono">{user.username}</h2>

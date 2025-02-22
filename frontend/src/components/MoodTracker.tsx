@@ -16,32 +16,32 @@ const MoodTracker = () => {
   };
 
   return (
-    <form className="flex justify-center">
-      <div className="flex space-x-4">
-        {moods.map((mood) => (
-          <label
-            key={mood.value}
-            className="cursor-pointer text-4xl transition-transform duration-200"
-          >
-            <input
-              type="radio"
-              name="mood"
-              value={mood.value}
-              checked={selectedMood === mood.value}
-              onChange={handleChange}
-              className="hidden"
-            />
-            <span
-              className={
-                selectedMood === mood.value ? "scale-125" : "scale-100"
-              }
-            >
-              {mood.emoji}
-            </span>
-          </label>
-        ))}
+    <div className="w-full flex justify-center">
+      <div className="bg-[#6C9BCF] text-[#333333] p-5 rounded-lg shadow-lg w-[90%] max-w-md mt-5">
+        <h2 className="text-lg font-semibold text-center">How are you feeling today?</h2>
+        <form className="flex justify-center space-x-4 mt-3">
+          {moods.map((mood) => (
+            <label key={mood.value} className="cursor-pointer">
+              <input
+                type="radio"
+                name="mood"
+                value={mood.value}
+                checked={selectedMood === mood.value}
+                onChange={handleChange}
+                className="hidden"
+              />
+              <span
+                className={`inline-flex text-4xl transition-transform duration-200 ${
+                  selectedMood === mood.value ? "scale-125" : "hover:scale-110"
+                }`}
+              >
+                {mood.emoji}
+              </span>
+            </label>
+          ))}
+        </form>
       </div>
-    </form>
+    </div>
   );
 };
 
