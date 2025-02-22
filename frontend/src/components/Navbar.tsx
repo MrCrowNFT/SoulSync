@@ -3,7 +3,7 @@ import DarkModeToggle from "./DarkModeToggle";
 
 const Navbar = () => {
   return (
-    <div className="sticky top-0 h-auto bg-[#6C9BCF] dark:bg-gray-900 p-6 text-[#333333] dark:text-gray-100 font-mono transition-colors duration-300">
+    <div className="sticky top-0 h-auto bg-[#6C9BCF] dark:bg-gray-900 p-6 text-[#333333] dark:text-gray-100 font-mono transition-colors duration-300 z-50">
       <div className="flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-10 ml-5">
