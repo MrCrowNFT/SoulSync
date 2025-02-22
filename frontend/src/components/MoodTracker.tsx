@@ -18,7 +18,7 @@ const MoodTracker = () => {
   return (
     <div className="w-full flex justify-center">
       <div className="bg-[#6C9BCF] text-[#333333] p-5 rounded-lg shadow-lg w-[90%] max-w-md mt-5">
-        <h2 className="text-lg font-semibold text-center">How are you feeling today?</h2>
+        <h2 className="text-lg font-semibold font-mono text-center">How are you feeling today?</h2>
         <form className="flex justify-center space-x-4 mt-3">
           {moods.map((mood) => (
             <label key={mood.value} className="cursor-pointer">
