@@ -13,7 +13,7 @@ const LoginModal = () => {
     <div className=" flex items-center justify-center bg-gradient-to-r from-blue-50 to-indigo-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl font-bold font-mono text-gray-900 mb-2">
             Welcome Back
           </h1>
         </div>
@@ -27,7 +27,10 @@ const LoginModal = () => {
         <form onSubmit={handleLogin} className="mt-6 space-y-6">
           <div className="space-y-4">
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="username"
+                className="block text-sm font-medium font-mono text-gray-700 mb-1"
+              >
                 Username
               </label>
               <input
@@ -42,7 +45,10 @@ const LoginModal = () => {
               />
             </div>
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium font-mono text-gray-700 mb-1"
+              >
                 Password
               </label>
               <input
@@ -62,7 +68,7 @@ const LoginModal = () => {
             <button
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent 
-                        text-sm font-semibold rounded-lg text-white bg-blue-600 hover:bg-blue-700 
+                        text-sm font-semibold font-mono rounded-lg text-white bg-blue-600 hover:bg-blue-700 
                         transition-colors duration-200 cursor-pointer"
             >
               Log in
