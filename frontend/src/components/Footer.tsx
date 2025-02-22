@@ -113,16 +113,16 @@ const Footer = () => {
         <div className="flex items-center justify-normal space-x-5">
           <h2 className="my-auto self-center text-[hsl(0,0%,10%)] dark:text-gray-100">Follow Us!</h2>
           <a href="#" target="_blank" rel="noreferrer">
-            <Instagram className="social-media-img text-[hsl(0,0%,10%)] dark:text-gray-100" />
+            <Instagram className="social-media-img text-[hsl(0,0%,15%)] dark:text-gray-100" />
           </a>
           <a href="#" target="_blank" rel="noreferrer">
-            <Twitter className="social-media-img text-[hsl(0,0%,10%)] dark:text-gray-100" />
+            <Twitter className="social-media-img text-[hsl(0,0%,15%)] dark:text-gray-100" />
           </a>
           <a href="#" target="_blank" rel="noreferrer">
-            <Facebook className="social-media-img text-[hsl(0,0%,10%)] dark:text-gray-100" />
+            <Facebook className="social-media-img text-[hsl(0,0%,15%)] dark:text-gray-100" />
           </a>
           <a href="#" target="_blank" rel="noreferrer">
-            <Linkedin className="social-media-img text-[hsl(0,0%,10%)] dark:text-gray-100" />
+            <Linkedin className="social-media-img text-[hsl(0,0%,15%)] dark:text-gray-100" />
           </a>
         </div>
 
