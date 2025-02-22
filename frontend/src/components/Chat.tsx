@@ -19,7 +19,7 @@ const Chat = () => {
       <form onSubmit={handleSubmit} className="flex w-full items-center gap-2">
         {/* Clip Icon and Input Container */}
         <div className="flex items-center bg-white rounded-full border border-[#6C9BCF] p-1 flex-grow">
-          <img src="" alt="clip-icon" className="w-6 h-6 ml-2" />
+          <img src="" alt="clip-icon" className="w-6 h-6 ml-2 cursor-pointer" />
           <input
             className="p-2 flex-grow rounded-full outline-none ml-2"
             value={input}
@@ -31,7 +31,7 @@ const Chat = () => {
         {/* Send Button */}
         <button
           type="submit"
-          className="bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition-colors"
+          className="bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition-colors cursor-pointer"
         >
           <img src="" alt="send-button" className="w-6 h-6" />
         </button>
