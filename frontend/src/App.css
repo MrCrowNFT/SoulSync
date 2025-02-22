@@ -4,5 +4,7 @@
   @apply hover:text-[hsl(0,0%,10%)] transition-transform duration-300;
 }
 .social-media-img {
-  @apply hover:scale-110 transition-transform duration-300 flex items-center ;
+  @apply hover:scale-110 transition-transform duration-300 flex items-center;
 }
+
+@custom-variant dark (&:where(.dark, .dark *));

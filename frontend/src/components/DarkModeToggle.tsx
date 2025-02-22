@@ -1,19 +1,25 @@
 import { useState, useEffect } from "react";
 
 const DarkModeToggle = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    // Check localStorage on initial render to save mode preference in a way
+    return localStorage.getItem("darkMode") === "true";
+  });
 
   useEffect(() => {
+    const root = document.documentElement;
     if (darkMode) {
-      document.documentElement.classList.add("dark");
+      root.classList.add("dark");
     } else {
-      document.documentElement.classList.remove("dark");
+      root.classList.remove("dark");
     }
   }, [darkMode]);
 
   return (
     <button
-      onClick={() => setDarkMode(!darkMode)}
+      onClick={() => {
+        setDarkMode(!darkMode);
+      }}
       className="relative flex items-center w-16 h-8 rounded-full p-1 bg-gray-300 dark:bg-gray-700 transition-all duration-300 ease-in-out shadow-md hover:shadow-lg"
     >
       {/* Sun Icon */}

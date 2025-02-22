@@ -3,7 +3,7 @@ import DarkModeToggle from "./DarkModeToggle";
 
 const Navbar = () => {
   return (
-    <div className="sticky top-0 h-auto bg-[#6C9BCF] p-6 text-[#333333] font-mono">
+    <div className="sticky top-0 h-auto dark:bg-gray-900 bg-[#6C9BCF] p-6 text-[#333333] font-mono">
       <div className="flex items-center justify-between">
         {/*Logo */}
         <div className="flex items-center gap-10 ml-5">
@@ -31,7 +31,7 @@ const Navbar = () => {
         </div>
         {/*Login Signup */}
         <div className="flex justify-end space-x-4 gap-6 mr-5">
-          <DarkModeToggle/>
+          <DarkModeToggle />
           <Link to="/login" className="custom-link">
             Login
           </Link>
