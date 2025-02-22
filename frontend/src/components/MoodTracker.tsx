@@ -15,11 +15,14 @@ const MoodTracker = () => {
     setSelectedMood(e.target.value);
   };
 
+  //TODO: Ones the user submit it's mood, i should desapear for maybe like 30 minutes
   return (
-    <div className="w-full flex justify-center">
-      <div className="bg-[#6C9BCF] text-[#333333] p-5 rounded-lg shadow-lg w-[90%] max-w-md mt-5">
-        <h2 className="text-lg font-semibold font-mono text-center">How are you feeling today?</h2>
-        <form className="flex justify-center space-x-4 mt-3">
+    <div className="flex justify-center items-center w-full mt-5">
+      <div className="bg-white text-gray-800 p-6 rounded-xl shadow-md w-[90%] max-w-md border border-[#6C9BCF]">
+        <h2 className="text-xl font-semibold text-center mb-4">
+          How are you feeling today?
+        </h2>
+        <form className="flex justify-center space-x-5">
           {moods.map((mood) => (
             <label key={mood.value} className="cursor-pointer">
               <input
@@ -32,7 +35,9 @@ const MoodTracker = () => {
               />
               <span
                 className={`inline-flex text-4xl transition-transform duration-200 ${
-                  selectedMood === mood.value ? "scale-125" : "hover:scale-110"
+                  selectedMood === mood.value
+                    ? "scale-125 text-blue-500"
+                    : "hover:scale-110"
                 }`}
               >
                 {mood.emoji}
