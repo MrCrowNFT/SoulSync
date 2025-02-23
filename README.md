@@ -34,13 +34,13 @@ Goal: Set up the project and build the mood tracking feature.
 
 #### Tasks:
 
-- Set up the React project with Tailwind CSS.
+- Set up the React project with Tailwind CSS.✅
 
-- Create a responsive layout for mobile and web.
+- Create a responsive layout for mobile and web.✅
 
-- Build the mood tracking UI (e.g., emoji picker or slider).
+- Build the mood tracking UI (e.g., emoji picker ).✅
 
-- Set up the backend (Node.js/Express or Python/Flask).
+- Set up the backend (Node.js/Express).
 
 - Create an API endpoint to save mood data to the database.
 
@@ -48,7 +48,7 @@ Goal: Set up the project and build the mood tracking feature.
 
 #### Deliverables:
 
-- Mood tracking UI (frontend).
+- Mood tracking UI (frontend).✅
 
 - API endpoint to save mood data (backend).
 
@@ -128,15 +128,15 @@ Goal: Test the app, fix bugs, and deploy it.
 
 #### Week 1:
 
-- Day 1-2: Set up React project with Tailwind CSS.
+- Day 1-2: Set up React project with Tailwind CSS.✅
 
-- Day 3-4: Create a responsive layout for mobile and web.
+- Day 3-4: Create a responsive layout for mobile and web.✅
 
-- Day 5-7: Build the mood tracking UI (emoji picker or slider).
+- Day 5-7: Build the mood tracking UI (emoji picker ).✅
 
 #### Week 2:
 
-- Day 1-2: Set up the backend (Node.js/Express or Python/Flask).
+- Day 1-2: Set up the backend (Node.js/Express).
 
 - Day 3-4: Create an API endpoint to save mood data.
 
