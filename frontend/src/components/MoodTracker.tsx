@@ -15,7 +15,7 @@ const MoodTracker = () => {
     setSelectedMood(e.target.value);
   };
 
-  //TODO: Ones the user submit it's mood, i should desapear for maybe like 30 minutes
+  //TODO: Once the user submit it's mood, i should desapear for maybe like 30 minutes
   return (
     <div className="flex justify-center items-center w-full mt-5">
       <div className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 p-6 rounded-xl shadow-md w-[90%] max-w-md border border-[#6C9BCF] dark:border-gray-600 transition-colors duration-300">
