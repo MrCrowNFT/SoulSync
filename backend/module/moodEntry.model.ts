@@ -6,9 +6,10 @@ const moodEntryScheema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId, // Reference to the user
       ref: "User",
+      required: true
     },
     note: String, //will also save the recieved string, for testing porpuses
-    mood: Number, // scale for mood from 1-5 (very_sad=1, very_happy=5)
+    mood: { Number, required: true }, // scale for mood from 1-5 (very_sad=1, very_happy=5)
     // this is just a prototype, need further investigation for improvment
   },
   {
