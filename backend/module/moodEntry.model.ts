@@ -1,22 +1,31 @@
 import mongoose from "mongoose";
 
-const moodEntryScheema = new mongoose.Schema(
+const moodEntrySchema = new mongoose.Schema(
   {
-    _id: mongoose.Schema.Types.ObjectId,
     userId: {
-      type: mongoose.Schema.Types.ObjectId, // Reference to the user
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
+      required: true,
     },
-    note: String, //will also save the recieved string, for testing porpuses
-    mood: { Number, required: true }, // scale for mood from 1-5 (very_sad=1, very_happy=5)
-    // this is just a prototype, need further investigation for improvment
+    mood: {
+      type: Number,
+      required: true,
+      min: 1,
+      max: 5,
+      validate: {
+        validator: Number.isInteger,
+        message: "Mood must be an integer between 1 and 5",
+      },
+    }, // scale: 1 (Very Sad) to 5 (Very Happy)->need to set this up in the front end
   },
   {
-    timestamps: true, //createdAt, updatedAt
+    timestamps: true, // add createdAt and updatedAt fields -> useful for dashboard
   }
 );
 
-const MoodEntry = mongoose.model("MoodEntry", moodEntryScheema);
+// add an index on userId for faster queries
+moodEntrySchema.index({ userId: 1 });
+
+const MoodEntry = mongoose.model("MoodEntry", moodEntrySchema);
 
 export default MoodEntry;

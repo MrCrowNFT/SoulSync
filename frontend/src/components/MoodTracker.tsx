@@ -4,11 +4,11 @@ const MoodTracker = () => {
   const [selectedMood, setSelectedMood] = useState("");
 
   const moods = [
-    { value: "very_sad", emoji: "😢" },
-    { value: "sad", emoji: "😞" },
-    { value: "neutral", emoji: "😐" },
-    { value: "happy", emoji: "😊" },
-    { value: "very_happy", emoji: "😁" },
+    { value: 1, emoji: "😢" },
+    { value: 2, emoji: "😞" },
+    { value: 3, emoji: "😐" },
+    { value: 4, emoji: "😊" },
+    { value: 5, emoji: "😁" },
   ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
