@@ -31,46 +31,61 @@ const MoodTracker = () => {
     }
   };
 
+  //maybe change this for a pop up
   if (isSubmitted) {
     return (
-      <div className="p-4 rounded-lg text-center">
-        <p>Thanks for sharing how you feel! We'll check back later.</p>
+      <div className="flex justify-center items-center w-full mt-5">
+        <div className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 p-6 rounded-xl shadow-md w-[90%] max-w-md border border-[#6C9BCF] dark:border-gray-600 transition-colors duration-300 text-center">
+          <p>Thanks for sharing how you feel! We'll check back later.</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="p-4 rounded-lg">
-      <div className="text-center">
-        <h2 className="text-xl mb-4">How are you feeling today?</h2>
+    <div className="flex justify-center items-center w-full mt-5">
+      <div className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 p-6 rounded-xl shadow-md w-[90%] max-w-md border border-[#6C9BCF] dark:border-gray-600 transition-colors duration-300">
+        <h2 className="text-xl font-semibold text-center mb-4">
+          How are you feeling today?
+        </h2>
 
-        <div className="flex justify-center gap-3 mb-4">
+        <div className="flex justify-center space-x-5 mb-4">
           {moods.map((mood) => (
-            <button
-              key={mood.value}
-              onClick={() => handleChange(mood.value)}
-              className={`text-3xl p-2 rounded-full ${
-                selectedMood === mood.value
-                  ? "bg-gray-100 scale-110 transform transition-transform"
-                  : "hover:bg-gray-50"
-              }`}
-            >
-              {mood.emoji}
-            </button>
+            <label key={mood.value} className="cursor-pointer">
+              <input
+                type="radio"
+                name="mood"
+                value={mood.value}
+                checked={selectedMood === mood.value}
+                onChange={() => handleChange(mood.value)}
+                className="hidden"
+              />
+              <span
+                className={`inline-flex text-4xl transition-transform duration-200 ${
+                  selectedMood === mood.value
+                    ? "scale-125 text-blue-500 dark:text-blue-400"
+                    : "hover:scale-110"
+                }`}
+              >
+                {mood.emoji}
+              </span>
+            </label>
           ))}
         </div>
 
-        <button
-          onClick={handleSubmit}
-          disabled={selectedMood === null}
-          className={`px-4 py-2 rounded ${
-            selectedMood === null
-              ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-              : "bg-gray-800 text-white hover:bg-gray-700"
-          }`}
-        >
-          Submit
-        </button>
+        <div className="text-center mt-4">
+          <button
+            onClick={handleSubmit}
+            disabled={selectedMood === null}
+            className={`px-4 py-2 rounded-md transition-colors duration-200 ${
+              selectedMood === null
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-blue-500 text-white hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 cursor-pointer"
+            }`}
+          >
+            Submit
+          </button>
+        </div>
       </div>
     </div>
   );
