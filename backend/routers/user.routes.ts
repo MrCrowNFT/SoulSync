@@ -3,18 +3,18 @@ import express from "express";
 const userRouter = express.Router();
 
 // Fetch all users, probably make this admin only
-userRouter.get("/users", );
+userRouter.get("/");
 
 // Fetch a specific user
-userRouter.get("/users/:userId", );
+userRouter.get("/:userId");
 
 // Create a new user
-userRouter.post("/users", );
+userRouter.post("/");
 
 // Update a user’s profile
-userRouter.put("/users/:userId", );
+userRouter.put("/:userId");
 
 // Delete a user
-userRouter.delete("/users/:userId", );
+userRouter.delete("/:userId");
 
 export default userRouter;

@@ -3,12 +3,12 @@ import express from "express";
 const chatAIRouter = express.Router();
 
 // Fetch chat history for a user
-chatAIRouter.get("/api/users/:userId/chat-history", );
+chatAIRouter.get("/:userId", );
 
 // Send a message to the AI
-chatAIRouter.post("/api/users/:userId/chat", );
+chatAIRouter.post("/:userId", );
 
 // Delete chat history for a user
-chatAIRouter.delete("/api/users/:userId/chat-history", );
+chatAIRouter.delete("/:userId", );
 
 export default chatAIRouter;

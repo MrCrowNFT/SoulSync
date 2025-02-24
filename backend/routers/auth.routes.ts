@@ -3,15 +3,15 @@ import express from "express";
 const authRouter = express.Router();
 
 // User sign-up
-authRouter.post("/api/auth/signup", );
+authRouter.post("/signup", );
 
 // User login
-authRouter.post("/api/auth/login", );
+authRouter.post("/login", );
 
 // User logout
-authRouter.post("/api/auth/logout", );
+authRouter.post("/logout", );
 
 // Refresh access token
-authRouter.post("/api/auth/refresh-token", );
+authRouter.post("/refresh-token", );
 
 export default authRouter;
