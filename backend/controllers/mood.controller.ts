@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 import MoodEntry from "../module/moodEntry.model";
 import { getMoodAverages } from "../helpers/mood.helpers";
+import { Request, Response } from "express";
 
 // Get entries for specific queries (id, timestamp, etc)
-export const getEntries = async (req, res) => {
+export const getEntries = async (req: Request, res: Response) => {
   try {
     const { userId, type } = req.query;
 
@@ -36,7 +37,7 @@ export const getEntries = async (req, res) => {
 };
 
 // Create new entry
-export const newEntry = async (req, res) => {
+export const newEntry = async (req: Request, res: Response) => {
   try {
     const { userId, mood } = req.query;
     if (!userId || !mood) {
@@ -57,7 +58,7 @@ export const newEntry = async (req, res) => {
   }
 };
 // update entry
-export const updateEntry = async (req, res) => {
+export const updateEntry = async (req: Request, res: Response) => {
   try {
     const { userId, moodId, mood } = req.query;
 
@@ -83,7 +84,7 @@ export const updateEntry = async (req, res) => {
 };
 
 // delete entry
-export const deleteMoodEntry = async (req, res) => {
+export const deleteMoodEntry = async (req: Request, res: Response) => {
   try {
     const { userId, moodId } = req.query;
 
