@@ -1,5 +1,5 @@
 import express from "express";
-import { getEntries } from "../controllers/mood.controller";
+import { deleteMoodEntry, getEntries, newEntry, updateEntry } from "../controllers/mood.controller";
 
 const moodRouter = express.Router();
 
@@ -9,12 +9,12 @@ const moodRouter = express.Router();
 moodRouter.get("/", getEntries);
 
 // Create a new mood entry
-moodRouter.post("/");
+moodRouter.post("/", newEntry);
 
 // Update a mood entry
-moodRouter.put("/");
+moodRouter.put("/", updateEntry);
 
 // Delete a mood entry
-moodRouter.delete("/");
+moodRouter.delete("/", deleteMoodEntry);
 
 export default moodRouter;
