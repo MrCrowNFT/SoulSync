@@ -31,3 +31,33 @@ const getWeeklyAverages = async (userId: mongoose.Types.ObjectId) => {
 
   return weeklyAverages;
 };
+
+const getMonthlyAverages = async (userId: mongoose.Types.ObjectId) => {
+  const monthlyAverages = await MoodEntry.aggregate([
+    {
+      $match: {
+        userId: userId,
+        createdAt: {
+          $gte: new Date(new Date().setMonth(new Date().getMonth() - 1)), //again confusing, but should give 30 days
+        },
+      },
+    },
+    {
+      $group: {
+        _id: { $dayOfMonth: "$createdAt" }, // group by day of the month
+        averageMood: { $avg: "$mood" },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        day: "$_id",
+        averageMood: 1,
+      },
+    },
+    {
+      $sort: { day: 1 }, // Sort by day of the month
+    },
+  ]);
+  return monthlyAverages;
+};
