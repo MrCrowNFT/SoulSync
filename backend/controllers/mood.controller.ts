@@ -83,3 +83,24 @@ export const updateEntry = async (req, res) => {
 };
 
 // delete entry
+export const deleteMoodEntry = async (req, res) => {
+  try {
+    const { userId, moodId } = req.query;
+
+    const deletedMoodEntry = await MoodEntry.findByIdAndDelete(moodId);
+    if (!deletedMoodEntry) {
+      return res.status(404).json({
+        success: false,
+        message: "Mood entry not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Mood entry deleted successfully",
+    });
+  } catch (error) {
+    console.error(`Error deleting Mood Entry: ${error.message}`);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+};
