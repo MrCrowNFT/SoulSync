@@ -26,13 +26,11 @@ export const getEntries = async (req: Request, res: Response) => {
     res.status(200).json({ success: true, data: averages });
   } catch (error) {
     console.error("Error in getEntries:", error);
-    res
-      .status(500)
-      .json({
-        success: false,
-        error: "Internal server error",
-        details: error.message,
-      });
+    res.status(500).json({
+      success: false,
+      error: "Internal server error",
+      details: error.message,
+    });
   }
 };
 
@@ -40,20 +38,41 @@ export const getEntries = async (req: Request, res: Response) => {
 export const newEntry = async (req: Request, res: Response) => {
   try {
     const { userId, mood } = req.query;
+
     if (!userId || !mood) {
-      return res.status(400).json({ error: "userId and mood are required" });
+      return res
+        .status(400)
+        .json({ success: false, error: "userId and mood are required" });
     }
+
     if (!mongoose.Types.ObjectId.isValid(userId as string)) {
-      return res.status(400).json({ error: "Invalid userId format" });
+      return res
+        .status(400)
+        .json({ success: false, error: "Invalid userId format" });
     }
 
-    const userIdObj = new mongoose.Types.ObjectId(userId as string);
+    const moodValue = parseInt(mood as string, 10);
+    if (isNaN(moodValue)) {
+      return res
+        .status(400)
+        .json({ success: false, error: "Mood must be a number" });
+    }
 
-    const newMoodEntry = new MoodEntry();
+    if (moodValue < 1 || moodValue > 5) {
+      return res
+        .status(400)
+        .json({ success: false, error: "Mood must be between 1 and 5" });
+    }
+
+    const newMoodEntry = new MoodEntry({
+      userId: new mongoose.Types.ObjectId(userId as string),
+      mood: moodValue,
+    });
+
     await newMoodEntry.save();
-    return res.status(200).json({ success: true, data: newMoodEntry });
+    res.status(201).json({ success: true, data: newMoodEntry });
   } catch (error) {
-    console.error("Unexpected error:", error);
+    console.error("Error in newEntry:", error);
     res
       .status(500)
       .json({
@@ -63,6 +82,7 @@ export const newEntry = async (req: Request, res: Response) => {
       });
   }
 };
+
 // update entry
 export const updateEntry = async (req: Request, res: Response) => {
   try {
@@ -85,13 +105,11 @@ export const updateEntry = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error(`Error updating Mood Entry: ${error.message}`);
-    res
-      .status(500)
-      .json({
-        success: false,
-        error: "Internal server error",
-        details: error.message,
-      });
+    res.status(500).json({
+      success: false,
+      error: "Internal server error",
+      details: error.message,
+    });
   }
 };
 
@@ -114,12 +132,10 @@ export const deleteMoodEntry = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error(`Error deleting Mood Entry: ${error.message}`);
-    res
-      .status(500)
-      .json({
-        success: false,
-        error: "Internal server error",
-        details: error.message,
-      });
+    res.status(500).json({
+      success: false,
+      error: "Internal server error",
+      details: error.message,
+    });
   }
 };
