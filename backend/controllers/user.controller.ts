@@ -114,40 +114,41 @@ export const updateUser = async (req: Request, res: Response) => {
     const { name, lastName, username, gender, email, photo } = req.body;
 
     if (!userId) {
-      return res
-        .status(400)
-        .json({ success: false, message: "User ID is required." });
+      res.status(400).json({ success: false, message: "User ID is required." });
+      return;
     }
 
     if (!mongoose.Types.ObjectId.isValid(userId)) {
-      return res
+      res
         .status(400)
         .json({ success: false, message: "Invalid user ID format." });
+      return;
     }
 
     const user = await User.findById(userId);
     if (!user) {
-      return res
-        .status(404)
-        .json({ success: false, message: "User not found." });
+      res.status(404).json({ success: false, message: "User not found." });
+      return;
     }
 
     // check username or email already exists but excluding the current user
     if (username && username !== user.username) {
       const existingUsername = await User.findOne({ username });
       if (existingUsername) {
-        return res
+        res
           .status(400)
           .json({ success: false, message: "Username already in use." });
+        return;
       }
     }
 
     if (email && email !== user.email) {
       const existingEmail = await User.findOne({ email });
       if (existingEmail) {
-        return res
+        res
           .status(400)
           .json({ success: false, message: "Email already in use." });
+        return;
       }
     }
 
@@ -161,7 +162,7 @@ export const updateUser = async (req: Request, res: Response) => {
 
     await user.save();
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: "User updated successfully.",
       data: {
@@ -174,9 +175,10 @@ export const updateUser = async (req: Request, res: Response) => {
         photo: user.photo,
       },
     });
+    return;
   } catch (error) {
     console.error("Error updating user:", error);
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       error: "Internal server error",
       details: error.message,
@@ -190,32 +192,32 @@ export const deleteUser = async (req: Request, res: Response) => {
     const { userId } = req.params;
 
     if (!userId) {
-      return res
-        .status(400)
-        .json({ success: false, message: "User ID is required." });
+      res.status(400).json({ success: false, message: "User ID is required." });
+      return;
     }
 
     if (!mongoose.Types.ObjectId.isValid(userId)) {
-      return res
+      res
         .status(400)
         .json({ success: false, message: "Invalid user ID format." });
+      return;
     }
 
     const user = await User.findById(userId);
     if (!user) {
-      return res
-        .status(404)
-        .json({ success: false, message: "User not found." });
+      res.status(404).json({ success: false, message: "User not found." });
+      return;
     }
 
     await User.findByIdAndDelete(userId);
 
-    return res
+    res
       .status(200)
       .json({ success: true, message: "User deleted successfully." });
+    return;
   } catch (error) {
     console.error("Error deleting user:", error);
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       error: "Internal server error",
       details: error.message,
