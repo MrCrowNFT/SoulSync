@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import MoodEntry from "../module/moodEntry.model";
+import { formatMoodData } from "../utils/mood.util";
 
 //Helper functions
 export const getWeeklyAverages = async (userId: mongoose.Types.ObjectId) => {
@@ -70,7 +71,7 @@ export const getYearlyAverages = async (userId: mongoose.Types.ObjectId) => {
         userId: userId,
         createdAt: {
           $gte: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
-        }, // Last 12 months
+        }, // last 12 months
       },
     },
     {
@@ -96,23 +97,23 @@ export const getYearlyAverages = async (userId: mongoose.Types.ObjectId) => {
 
 //Getter functions
 export const getMoodAverages = async (
-    userId: mongoose.Types.ObjectId,
-    type: string
-  ) => {
-    let averages;
-    switch (type) {
-      case "weekly":
-        averages = await getWeeklyAverages(userId);
-        break;
-      case "monthly":
-        averages = await getMonthlyAverages(userId);
-        break;
-      case "yearly":
-        averages = await getYearlyAverages(userId);
-        break;
-      default:
-        throw new Error("Invalid type. Use 'weekly', 'monthly', or 'yearly'.");
-    }
-  
-    return formatMoodData(averages, type);
-  };
+  userId: mongoose.Types.ObjectId,
+  type: string
+) => {
+  let averages;
+  switch (type) {
+    case "weekly":
+      averages = await getWeeklyAverages(userId);
+      break;
+    case "monthly":
+      averages = await getMonthlyAverages(userId);
+      break;
+    case "yearly":
+      averages = await getYearlyAverages(userId);
+      break;
+    default:
+      throw new Error("Invalid type. Use 'weekly', 'monthly', or 'yearly'.");
+  }
+
+  return formatMoodData(averages, type);
+};
