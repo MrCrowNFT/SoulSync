@@ -61,3 +61,34 @@ const getMonthlyAverages = async (userId: mongoose.Types.ObjectId) => {
   ]);
   return monthlyAverages;
 };
+
+const getYearlyAverages = async (userId: mongoose.Types.ObjectId) => {
+  const yearlyAverages = await MoodEntry.aggregate([
+    {
+      $match: {
+        userId: userId,
+        createdAt: {
+          $gte: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
+        }, // Last 12 months
+      },
+    },
+    {
+      $group: {
+        _id: { $month: "$createdAt" }, // group by month
+        averageMood: { $avg: "$mood" },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        month: "$_id",
+        averageMood: 1,
+      },
+    },
+    {
+      $sort: { month: 1 }, // sort by month
+    },
+  ]);
+
+  return yearlyAverages;
+};
