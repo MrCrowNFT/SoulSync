@@ -1,4 +1,5 @@
 import express from "express";
+import { createUser } from "../controllers/user.controller";
 
 const userRouter = express.Router();
 
@@ -9,7 +10,7 @@ userRouter.get("/");
 userRouter.get("/:userId");
 
 // Create a new user
-userRouter.post("/");
+userRouter.post("/", createUser);
 
 // Update a user’s profile
 userRouter.put("/:userId");

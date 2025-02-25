@@ -17,8 +17,8 @@ const userSchema = new mongoose.Schema(
       unique: true,
       match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // email validation
     },
-    passwordHash: { type: String, required: true, select: false }, // Hide by default to prevent exposing it, though it doesn't really matter because is encrypted,but whatever
-    photo: { type: String, default: "" }, 
+    password: { type: String, required: true, select: false }, // Hide by default to prevent exposing it, though it doesn't really matter because is encrypted,but whatever
+    photo: { type: String, default: "" },
     moodEntries: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema(
       ref: "Preferences",
     },
   },
-  { timestamps: true } 
+  { timestamps: true }
 );
 
 //hash the password before storing it in the database, pre middleware hook runs before saving
@@ -44,7 +44,7 @@ userSchema.pre("save", async function (next) {
   try {
     // only hash the password if is new/modified
     if (!this.isModified("password")) return next();
-    this.passwordHash = await bcrypt.hash(this.passwordHash, 10);
+    this.password = await bcrypt.hash(this.password, 10);
   } catch (error) {
     next(error as Error);
   }

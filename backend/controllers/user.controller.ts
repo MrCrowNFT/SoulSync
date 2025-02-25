@@ -43,7 +43,7 @@ export const createUser = async (req: Request, res: Response) => {
       username,
       gender,
       email,
-      passwordHash: password, // this will be hashed by the pre-save hook
+      password, // this will be hashed by the pre-save hook
       photo,
     });
 
