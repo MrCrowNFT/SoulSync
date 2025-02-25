@@ -2,11 +2,10 @@ import express from "express";
 
 const moodRouter = express.Router();
 
-// Fetch all mood entries for a user probably
-moodRouter.get("/:userId/");
+//todo all this routes need auth
 
-// Fetch a specific mood entry, should query this to get specific entries for dashboard
-moodRouter.get("/:userId/:moodId");
+// Fetch all mood entries for a user for a specific query
+moodRouter.get("/:userId/");
 
 // Create a new mood entry
 moodRouter.post("/:userId/");
