@@ -121,6 +121,38 @@ export const updateEntry = async (req: Request, res: Response) => {
     res.status(200).json({ success: true, data: updatedMoodEntry });
   } catch (error) {
     console.error("Error in updateEntry:", error);
+    res.status(500).json({
+      success: false,
+      error: "Internal server error",
+      details: error.message,
+    });
+  }
+};
+
+// delete entry
+export const deleteMoodEntry = async (req: Request, res: Response) => {
+  try {
+    const { moodId } = req.params;
+
+    if (!moodId) {
+      return res
+        .status(400)
+        .json({ success: false, error: "moodId is required" });
+    }
+
+    const deletedMoodEntry = await MoodEntry.findByIdAndDelete(moodId);
+
+    if (!deletedMoodEntry) {
+      return res
+        .status(404)
+        .json({ success: false, error: "Mood entry not found" });
+    }
+
+    res
+      .status(200)
+      .json({ success: true, message: "Mood entry deleted successfully" });
+  } catch (error) {
+    console.error("Error in deleteMoodEntry:", error);
     res
       .status(500)
       .json({
@@ -128,32 +160,5 @@ export const updateEntry = async (req: Request, res: Response) => {
         error: "Internal server error",
         details: error.message,
       });
-  }
-};
-
-// delete entry
-export const deleteMoodEntry = async (req: Request, res: Response) => {
-  try {
-    const { userId, moodId } = req.query;
-
-    const deletedMoodEntry = await MoodEntry.findByIdAndDelete(moodId);
-    if (!deletedMoodEntry) {
-      return res.status(404).json({
-        success: false,
-        message: "Mood entry not found",
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      message: "Mood entry deleted successfully",
-    });
-  } catch (error) {
-    console.error(`Error deleting Mood Entry: ${error.message}`);
-    res.status(500).json({
-      success: false,
-      error: "Internal server error",
-      details: error.message,
-    });
   }
 };
