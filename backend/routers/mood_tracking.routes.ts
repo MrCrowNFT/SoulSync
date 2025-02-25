@@ -3,7 +3,6 @@ import { deleteMoodEntry, getEntries, newEntry, updateEntry } from "../controlle
 
 const moodRouter = express.Router();
 
-
 // Fetch all mood entries for a user for a specific query
 moodRouter.get("/", getEntries);
 

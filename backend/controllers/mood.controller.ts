@@ -9,15 +9,13 @@ export const getEntries = async (req: Request, res: Response) => {
     const { userId, type } = req.query;
 
     if (!userId || !type) {
-      return res
+      res
         .status(400)
         .json({ success: false, error: "userId and type are required" });
     }
 
     if (!mongoose.Types.ObjectId.isValid(userId as string)) {
-      return res
-        .status(400)
-        .json({ success: false, error: "Invalid userId format" });
+      res.status(400).json({ success: false, error: "Invalid userId format" });
     }
     //getter functions handles valid types error
     const userIdObj = new mongoose.Types.ObjectId(userId as string);
@@ -40,26 +38,22 @@ export const newEntry = async (req: Request, res: Response) => {
     const { userId, mood } = req.query;
 
     if (!userId || !mood) {
-      return res
+      res
         .status(400)
         .json({ success: false, error: "userId and mood are required" });
     }
 
     if (!mongoose.Types.ObjectId.isValid(userId as string)) {
-      return res
-        .status(400)
-        .json({ success: false, error: "Invalid userId format" });
+      res.status(400).json({ success: false, error: "Invalid userId format" });
     }
 
     const moodValue = parseInt(mood as string, 10);
     if (isNaN(moodValue)) {
-      return res
-        .status(400)
-        .json({ success: false, error: "Mood must be a number" });
+      res.status(400).json({ success: false, error: "Mood must be a number" });
     }
 
     if (moodValue < 1 || moodValue > 5) {
-      return res
+      res
         .status(400)
         .json({ success: false, error: "Mood must be between 1 and 5" });
     }
@@ -87,20 +81,18 @@ export const updateEntry = async (req: Request, res: Response) => {
     const { moodId, mood } = req.body;
 
     if (!moodId || !mood) {
-      return res
+      res
         .status(400)
         .json({ success: false, error: "moodId and mood are required" });
     }
 
     const moodValue = parseInt(mood as string, 10);
     if (isNaN(moodValue)) {
-      return res
-        .status(400)
-        .json({ success: false, error: "Mood must be a number" });
+      res.status(400).json({ success: false, error: "Mood must be a number" });
     }
 
     if (moodValue < 1 || moodValue > 5) {
-      return res
+      res
         .status(400)
         .json({ success: false, error: "Mood must be between 1 and 5" });
     }
@@ -112,9 +104,7 @@ export const updateEntry = async (req: Request, res: Response) => {
     );
 
     if (!updatedMoodEntry) {
-      return res
-        .status(404)
-        .json({ success: false, error: "Mood entry not found" });
+      res.status(404).json({ success: false, error: "Mood entry not found" });
     }
 
     res.status(200).json({ success: true, data: updatedMoodEntry });
@@ -134,17 +124,13 @@ export const deleteMoodEntry = async (req: Request, res: Response) => {
     const { moodId } = req.query;
 
     if (!moodId) {
-      return res
-        .status(400)
-        .json({ success: false, error: "moodId is required" });
+      res.status(400).json({ success: false, error: "moodId is required" });
     }
 
     const deletedMoodEntry = await MoodEntry.findByIdAndDelete(moodId);
 
     if (!deletedMoodEntry) {
-      return res
-        .status(404)
-        .json({ success: false, error: "Mood entry not found" });
+      res.status(404).json({ success: false, error: "Mood entry not found" });
     }
 
     res
