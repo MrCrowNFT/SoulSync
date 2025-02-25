@@ -73,6 +73,54 @@ export const newEntry = async (req: Request, res: Response) => {
     res.status(201).json({ success: true, data: newMoodEntry });
   } catch (error) {
     console.error("Error in newEntry:", error);
+    res.status(500).json({
+      success: false,
+      error: "Internal server error",
+      details: error.message,
+    });
+  }
+};
+
+// update entry
+export const updateEntry = async (req: Request, res: Response) => {
+  try {
+    const { moodId } = req.params;
+    const { mood } = req.body;
+
+    if (!moodId || !mood) {
+      return res
+        .status(400)
+        .json({ success: false, error: "moodId and mood are required" });
+    }
+
+    const moodValue = parseInt(mood as string, 10);
+    if (isNaN(moodValue)) {
+      return res
+        .status(400)
+        .json({ success: false, error: "Mood must be a number" });
+    }
+
+    if (moodValue < 1 || moodValue > 5) {
+      return res
+        .status(400)
+        .json({ success: false, error: "Mood must be between 1 and 5" });
+    }
+
+    const updatedMoodEntry = await MoodEntry.findByIdAndUpdate(
+      moodId,
+      { mood: moodValue },
+      { new: true }
+    );
+
+    if (!updatedMoodEntry) {
+      return res
+        .status(404)
+        .json({ success: false, error: "Mood entry not found" });
+    }
+
+    res.status(200).json({ success: true, data: updatedMoodEntry });
+  } catch (error) {
+    console.error("Error in updateEntry:", error);
     res
       .status(500)
       .json({
@@ -80,36 +128,6 @@ export const newEntry = async (req: Request, res: Response) => {
         error: "Internal server error",
         details: error.message,
       });
-  }
-};
-
-// update entry
-export const updateEntry = async (req: Request, res: Response) => {
-  try {
-    const { userId, moodId, mood } = req.query;
-
-    const updatedMoodEntry = await MoodEntry.findByIdAndUpdate(moodId, mood, {
-      new: true,
-    });
-
-    if (!updatedMoodEntry) {
-      return res.status(404).json({
-        success: false,
-        message: "Mood entry not found",
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      data: updatedMoodEntry,
-    });
-  } catch (error) {
-    console.error(`Error updating Mood Entry: ${error.message}`);
-    res.status(500).json({
-      success: false,
-      error: "Internal server error",
-      details: error.message,
-    });
   }
 };
 
