@@ -13,7 +13,7 @@ export const getEntries = async (req: Request, res: Response) => {
     }
 
     // validate userId before converting
-    if (!mongoose.Types.ObjectId.isValid(userId)) {
+    if (!mongoose.Types.ObjectId.isValid(userId as string)) {
       return res.status(400).json({ error: "Invalid userId format" });
     }
 
@@ -32,7 +32,8 @@ export const getEntries = async (req: Request, res: Response) => {
     }
   } catch (error) {
     console.error("Unexpected error:", error);
-    res.status(500).json({ success: false, error: "Internal server error" });
+    res.status(500).json({ success: false, error: "Internal server error", details: error.message });
+
   }
 };
 
@@ -43,7 +44,7 @@ export const newEntry = async (req: Request, res: Response) => {
     if (!userId || !mood) {
       return res.status(400).json({ error: "userId and mood are required" });
     }
-    if (!mongoose.Types.ObjectId.isValid(userId)) {
+    if (!mongoose.Types.ObjectId.isValid(userId as string)) {
       return res.status(400).json({ error: "Invalid userId format" });
     }
 
@@ -54,7 +55,8 @@ export const newEntry = async (req: Request, res: Response) => {
     return res.status(200).json({ success: true, data: newMoodEntry });
   } catch (error) {
     console.error("Unexpected error:", error);
-    res.status(500).json({ success: false, error: "Internal server error" });
+    res.status(500).json({ success: false, error: "Internal server error", details: error.message });
+
   }
 };
 // update entry
@@ -79,7 +81,8 @@ export const updateEntry = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error(`Error updating Mood Entry: ${error.message}`);
-    res.status(500).json({ success: false, error: "Internal server error" });
+    res.status(500).json({ success: false, error: "Internal server error", details: error.message });
+
   }
 };
 
@@ -102,6 +105,7 @@ export const deleteMoodEntry = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error(`Error deleting Mood Entry: ${error.message}`);
-    res.status(500).json({ success: false, error: "Internal server error" });
+    res.status(500).json({ success: false, error: "Internal server error", details: error.message });
+
   }
 };
