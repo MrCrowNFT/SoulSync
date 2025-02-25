@@ -8,18 +8,22 @@ export const getUserById = async (req: Request, res: Response) => {
     const { userId } = req.params;
     if (!userId) {
       res.status(400).json({ success: false, error: "userId required" });
+      return;
     }
 
     if (!mongoose.Types.ObjectId.isValid(userId as string)) {
       res.status(400).json({ success: false, error: "Invalid userId format" });
+      return;
     }
 
     const user = await User.findById(userId).select("-password"); //exclude the password from the result
     if (!user) {
       res.status(404).json({ success: false, error: "User not found" });
+      return;
     }
 
     res.status(200).json({ success: true, data: user });
+    return;
   } catch (error) {
     console.error("Error gettin user:", error);
     res.status(500).json({
@@ -43,6 +47,7 @@ export const createUser = async (req: Request, res: Response) => {
         message:
           "Name, lastName, username, gender, email and password are required.",
       });
+      return;
     }
 
     const existingUsername = await User.findOne({ username });
@@ -51,6 +56,7 @@ export const createUser = async (req: Request, res: Response) => {
         success: false,
         message: "Username already in use",
       });
+      return;
     }
 
     // Check if email already exists
@@ -60,6 +66,7 @@ export const createUser = async (req: Request, res: Response) => {
         success: false,
         message: "Email already in use",
       });
+      return;
     }
 
     // Create new user
@@ -89,6 +96,7 @@ export const createUser = async (req: Request, res: Response) => {
         photo: newUser.photo,
       },
     });
+    return;
   } catch (error) {
     console.error("Error creating user:", error);
     res.status(500).json({
