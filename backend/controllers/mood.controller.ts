@@ -31,7 +31,7 @@ export const getEntries = async (req, res) => {
     }
   } catch (error) {
     console.error("Unexpected error:", error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ success: false, error: "Internal server error" });
   }
 };
 
@@ -53,9 +53,33 @@ export const newEntry = async (req, res) => {
     return res.status(200).json({ success: true, data: newMoodEntry });
   } catch (error) {
     console.error("Unexpected error:", error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ success: false, error: "Internal server error" });
   }
 };
 // update entry
+export const updateEntry = async (req, res) => {
+  try {
+    const { userId, moodId, mood } = req.query;
+
+    const updatedMoodEntry = await MoodEntry.findByIdAndUpdate(moodId, mood, {
+      new: true,
+    });
+
+    if (!updatedMoodEntry) {
+      return res.status(404).json({
+        success: false,
+        message: "Mood entry not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: updatedMoodEntry,
+    });
+  } catch (error) {
+    console.error(`Error updating Mood Entry: ${error.message}`);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+};
 
 // delete entry

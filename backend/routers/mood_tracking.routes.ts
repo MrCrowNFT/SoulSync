@@ -12,9 +12,9 @@ moodRouter.get("/", getEntries);
 moodRouter.post("/");
 
 // Update a mood entry
-moodRouter.put("/:moodId");
+moodRouter.put("/");
 
 // Delete a mood entry
-moodRouter.delete("/:moodId");
+moodRouter.delete("/");
 
 export default moodRouter;
