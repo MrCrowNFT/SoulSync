@@ -3,10 +3,12 @@ import MoodEntry from "../module/moodEntry.model";
 // Get entries for specific queries (id, timestamp, etc)
 export const getEntries = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { timestamp, limit } = req.query;
+    const { userId, type } = req.query;
+    
+    if (!userId || !type) {
+        return res.status(400).json({ error: "userId and type are required" });
+      }
 
-    const query = {};
 
 
   } catch {}

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import MoodEntry from "../module/moodEntry.model";
 
+//Helper functions
 export const getWeeklyAverages = async (userId: mongoose.Types.ObjectId) => {
   const weeklyAverages = await MoodEntry.aggregate([
     {
@@ -19,9 +20,9 @@ export const getWeeklyAverages = async (userId: mongoose.Types.ObjectId) => {
     },
     {
       $project: {
-        _id: 0,
-        day: "$_id",
-        averageMood: 1,
+        _id: 0, //exclude id on the output
+        day: "$_id", //rename id to day
+        averageMood: 1, //add averageMood to output
       },
     },
     {
@@ -92,3 +93,26 @@ export const getYearlyAverages = async (userId: mongoose.Types.ObjectId) => {
 
   return yearlyAverages;
 };
+
+//Getter functions
+export const getMoodAverages = async (
+    userId: mongoose.Types.ObjectId,
+    type: string
+  ) => {
+    let averages;
+    switch (type) {
+      case "weekly":
+        averages = await getWeeklyAverages(userId);
+        break;
+      case "monthly":
+        averages = await getMonthlyAverages(userId);
+        break;
+      case "yearly":
+        averages = await getYearlyAverages(userId);
+        break;
+      default:
+        throw new Error("Invalid type. Use 'weekly', 'monthly', or 'yearly'.");
+    }
+  
+    return formatMoodData(averages, type);
+  };
