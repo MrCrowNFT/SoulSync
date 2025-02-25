@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import MoodEntry from "../module/moodEntry.model";
 
-const getWeeklyAverages = async (userId: mongoose.Types.ObjectId) => {
+export const getWeeklyAverages = async (userId: mongoose.Types.ObjectId) => {
   const weeklyAverages = await MoodEntry.aggregate([
     {
       $match: {
@@ -32,7 +32,7 @@ const getWeeklyAverages = async (userId: mongoose.Types.ObjectId) => {
   return weeklyAverages;
 };
 
-const getMonthlyAverages = async (userId: mongoose.Types.ObjectId) => {
+export const getMonthlyAverages = async (userId: mongoose.Types.ObjectId) => {
   const monthlyAverages = await MoodEntry.aggregate([
     {
       $match: {
@@ -62,7 +62,7 @@ const getMonthlyAverages = async (userId: mongoose.Types.ObjectId) => {
   return monthlyAverages;
 };
 
-const getYearlyAverages = async (userId: mongoose.Types.ObjectId) => {
+export const getYearlyAverages = async (userId: mongoose.Types.ObjectId) => {
   const yearlyAverages = await MoodEntry.aggregate([
     {
       $match: {
