@@ -84,8 +84,7 @@ export const newEntry = async (req: Request, res: Response) => {
 // update entry
 export const updateEntry = async (req: Request, res: Response) => {
   try {
-    const { moodId } = req.params;
-    const { mood } = req.body;
+    const { moodId, mood } = req.body;
 
     if (!moodId || !mood) {
       return res
@@ -132,7 +131,7 @@ export const updateEntry = async (req: Request, res: Response) => {
 // delete entry
 export const deleteMoodEntry = async (req: Request, res: Response) => {
   try {
-    const { moodId } = req.params;
+    const { moodId } = req.query;
 
     if (!moodId) {
       return res
@@ -153,12 +152,10 @@ export const deleteMoodEntry = async (req: Request, res: Response) => {
       .json({ success: true, message: "Mood entry deleted successfully" });
   } catch (error) {
     console.error("Error in deleteMoodEntry:", error);
-    res
-      .status(500)
-      .json({
-        success: false,
-        error: "Internal server error",
-        details: error.message,
-      });
+    res.status(500).json({
+      success: false,
+      error: "Internal server error",
+      details: error.message,
+    });
   }
 };
