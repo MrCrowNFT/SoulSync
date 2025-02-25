@@ -23,9 +23,8 @@ export const getUserById = async (req: Request, res: Response) => {
     }
 
     res.status(200).json({ success: true, data: user });
-    return;
   } catch (error) {
-    console.error("Error gettin user:", error);
+    console.error("Error getting user:", error);
     res.status(500).json({
       success: false,
       error: "Internal server error",
@@ -96,7 +95,6 @@ export const createUser = async (req: Request, res: Response) => {
         photo: newUser.photo,
       },
     });
-    return;
   } catch (error) {
     console.error("Error creating user:", error);
     res.status(500).json({
@@ -175,7 +173,6 @@ export const updateUser = async (req: Request, res: Response) => {
         photo: user.photo,
       },
     });
-    return;
   } catch (error) {
     console.error("Error updating user:", error);
     res.status(500).json({
@@ -214,7 +211,6 @@ export const deleteUser = async (req: Request, res: Response) => {
     res
       .status(200)
       .json({ success: true, message: "User deleted successfully." });
-    return;
   } catch (error) {
     console.error("Error deleting user:", error);
     res.status(500).json({
