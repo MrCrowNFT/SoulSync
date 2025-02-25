@@ -108,5 +108,80 @@ export const createUser = async (req: Request, res: Response) => {
 };
 
 //update user
+export const updateUser = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+    const { name, lastName, username, gender, email, photo } = req.body;
+
+    if (!userId) {
+      return res
+        .status(400)
+        .json({ success: false, message: "User ID is required." });
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid user ID format." });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found." });
+    }
+
+    // check username or email already exists but excluding the current user
+    if (username && username !== user.username) {
+      const existingUsername = await User.findOne({ username });
+      if (existingUsername) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Username already in use." });
+      }
+    }
+
+    if (email && email !== user.email) {
+      const existingEmail = await User.findOne({ email });
+      if (existingEmail) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Email already in use." });
+      }
+    }
+
+    // Update only provided fields
+    if (name) user.name = name;
+    if (lastName) user.lastName = lastName;
+    if (username) user.username = username;
+    if (gender) user.gender = gender;
+    if (email) user.email = email;
+    if (photo) user.photo = photo;
+
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "User updated successfully.",
+      data: {
+        _id: user._id,
+        name: user.name,
+        lastName: user.lastName,
+        username: user.username,
+        gender: user.gender,
+        email: user.email,
+        photo: user.photo,
+      },
+    });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    return res.status(500).json({
+      success: false,
+      error: "Internal server error",
+      details: error.message,
+    });
+  }
+};
 
 //delete user
