@@ -1,7 +1,11 @@
 import User from "../module/user.model.ts";
 import { Request, Response } from "express";
 import RefreshToken from "../module/refreshToken.model.ts";
-import { generateTokens } from "../helpers/auth.helpers.ts";
+import {
+  generateTokens,
+  generateAccessToken,
+} from "../helpers/auth.helpers.ts";
+import jwt from "jsonwebtoken";
 
 export const login = async (req: Request, res: Response) => {
   try {
@@ -75,7 +79,40 @@ export const refreshToken = async (req: Request, res: Response) => {
         .json({ success: false, message: "Refresh token expired" });
       return;
     }
-  } catch {}
+
+    // Verify the refresh token
+    let decoded;
+    try {
+      decoded = jwt.verify(
+        refreshToken,
+        process.env.JWT_REFRESH_SECRET as string
+      );
+    } catch (error) {
+      //If verification fails, delete the stored refresh token from the database
+      //as a security measure -> if someone tries to use an invalid token (possibly tampered with), we remove it from the system entirely
+      await RefreshToken.deleteOne({ _id: storedToken._id });
+      res
+        .status(401)
+        .json({ success: false, message: "Invalid refresh token" });
+      return;
+    }
+
+    const user = await User.findById(decoded.id);
+    if (!user) {
+      return res
+        .status(401)
+        .json({ success: false, message: "User not found" });
+    }
+
+    const accessToken = generateAccessToken(user);
+    res.status(200).json({
+      success: true,
+      accessToken,
+    });
+  } catch (error) {
+    console.error(`Error refreshing token: ${error.message}`);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
 };
 
 export const logout = async (req: Request, res: Response) => {
