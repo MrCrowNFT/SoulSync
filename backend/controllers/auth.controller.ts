@@ -1,6 +1,8 @@
 import User from "../module/user.model.ts";
 import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
+import {IUser} from "../types/user.types.ts"
+
 
 export const login = async (req: Request, res: Response) => {
   try {
