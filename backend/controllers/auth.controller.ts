@@ -1,0 +1,34 @@
+import User from "../module/user.model.ts";
+import jwt from "jsonwebtoken";
+import { Request, Response } from "express";
+
+export const login = async (req: Request, res: Response) => {
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    if (!user) {
+      res.status(401).json({ success: false, message: "Invalid username" });
+      return;
+    }
+
+    const isMatch = await user.comparePassword(password).select('+password');//explicitly select password for comparison
+    if (!isMatch) {
+      res.status(401).json({ success: false, message: "Invalid password" });
+      return;
+    }
+
+    const token = jwt.sign(
+      { id: user._id, username: user.username },
+      process.env.JWT_SECRET as string,
+      { expiresIn: "1h" }
+    );
+    res.status(200).json({
+      success: true,
+      message: "Login successful",
+      token,
+    });
+  } catch (error) {
+    console.error(`Error during login: ${error.message}`);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
