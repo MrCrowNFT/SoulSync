@@ -5,18 +5,28 @@ import { IUser } from "../types/user.types.ts";
 const ACCESS_TOKEN_EXPIRY = "15m";
 const REFRESH_TOKEN_EXPIRY = "7d";
 
-//generate access and refresh tokens helper functions
-export const generateTokens = (user: IUser) => {
-  const accessToken = jwt.sign(
+// Generate just an access token
+export const generateAccessToken = (user: IUser) => {
+  return jwt.sign(
     { id: user._id, username: user.username },
     process.env.JWT_ACCESS_SECRET as string,
     { expiresIn: ACCESS_TOKEN_EXPIRY }
   );
-  const refreshToken = jwt.sign(
+};
+
+// Generate just a refresh token
+export const generateRefreshToken = (user: IUser) => {
+  return jwt.sign(
     { id: user._id, username: user.username },
     process.env.JWT_REFRESH_SECRET as string,
     { expiresIn: REFRESH_TOKEN_EXPIRY }
   );
+};
+
+// Generate both tokens
+export const generateTokens = (user: IUser) => {
+  const accessToken = generateAccessToken(user);
+  const refreshToken = generateRefreshToken(user);
 
   return { accessToken, refreshToken };
 };

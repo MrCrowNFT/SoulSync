@@ -47,7 +47,36 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-export const 
+export const refreshToken = async (req: Request, res: Response) => {
+  try {
+    //check refresh token
+    const { refreshToken } = req.body;
+    if (!refreshToken) {
+      res
+        .status(400)
+        .json({ success: false, message: "Refresh token is required" });
+      return;
+    }
+
+    //check if refresh token exist on db
+    const storedToken = await RefreshToken.findOne({ token: refreshToken });
+    if (!storedToken) {
+      res
+        .status(401)
+        .json({ success: false, message: "Invalid refresh token" });
+      return;
+    }
+
+    //check if refresh token isn't expired
+    if (storedToken.expiresAt < new Date()) {
+      await RefreshToken.deleteOne({ _id: storedToken._id });
+      res
+        .status(401)
+        .json({ success: false, message: "Refresh token expired" });
+      return;
+    }
+  } catch {}
+};
 
 export const logout = async (req: Request, res: Response) => {
   try {
