@@ -43,11 +43,18 @@ export const login = async (req: Request, res: Response) => {
     const { accessToken, refreshToken } = generateTokens(user);
 
     //store the refresh token on db
-    await RefreshToken.create({
+    const createdToken = await RefreshToken.create({
       token: refreshToken,
       user: user._id,
       expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), //* 7 days -> If changing the REFRESH_TOKEN_EXPIRY don't forget to also change this
     });
+    if (!createdToken) {
+      res.status(400).json({
+        success: false,
+        message: "Failed to save refresh token on database",
+      });
+      return;
+    }
 
     res.status(200).json({
       success: true,
@@ -63,6 +70,25 @@ export const login = async (req: Request, res: Response) => {
 
 export const logout = async (req: Request, res: Response) => {
   try {
+    const { refreshToken } = req.body;
+
+    if (!refreshToken) {
+      res
+        .status(400)
+        .json({ success: false, message: "Refresh token is required" });
+      return;
+    }
+
+    const deletedToken = await RefreshToken.deleteOne({ token: refreshToken });
+
+    if (!deletedToken) {
+      res.status(400).json({
+        success: false,
+        message: "Refresh token could not be deleted",
+      });
+      return;
+    }
+
     res.status(200).json({
       success: true,
       message: "Logout successful",
