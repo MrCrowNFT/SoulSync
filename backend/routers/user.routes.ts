@@ -1,10 +1,15 @@
 import express from "express";
-import { createUser, getUserById } from "../controllers/user.controller";
+import {
+  createUser,
+  deleteUser,
+  getUserById,
+  updateUser,
+} from "../controllers/user.controller";
 
 const userRouter = express.Router();
 
 // Fetch all users, probably make this admin only, -> do i even need this
-userRouter.get("/", );
+userRouter.get("/");
 
 // Fetch a specific user -> do i even need this?Yes, for getting info about the user for the ai
 userRouter.get("/:userId", getUserById);
@@ -13,9 +18,9 @@ userRouter.get("/:userId", getUserById);
 userRouter.post("/", createUser);
 
 // Update a user’s profile
-userRouter.put("/:userId");
+userRouter.put("/:userId", updateUser);
 
 // Delete a user
-userRouter.delete("/:userId");
+userRouter.delete("/:userId", deleteUser);
 
 export default userRouter;
