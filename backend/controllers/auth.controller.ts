@@ -27,6 +27,7 @@ const generateTokens = (user: IUser) => {
 export const login = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
+
     const user = await User.findOne({ username }).select("+password"); //explicitly select password for comparison
     if (!user) {
       res.status(401).json({ success: false, message: "Invalid username" });
@@ -39,15 +40,20 @@ export const login = async (req: Request, res: Response) => {
       return;
     }
 
-    const token = jwt.sign(
-      { id: user._id, username: user.username },
-      process.env.JWT_SECRET as string,
-      { expiresIn: "1h" }
-    );
+    const { accessToken, refreshToken } = generateTokens(user);
+
+    //store the refresh token on db
+    await RefreshToken.create({
+      token: refreshToken,
+      user: user._id,
+      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), //* 7 days -> If changing the REFRESH_TOKEN_EXPIRY don't forget to also change this
+    });
+
     res.status(200).json({
       success: true,
       message: "Login successful",
-      token,
+      accessToken,
+      refreshToken,
     });
   } catch (error) {
     console.error(`Error during login: ${error.message}`);
