@@ -9,9 +9,10 @@ export const authenticate = (
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res
+    res
       .status(401)
       .json({ success: false, message: "Unauthorized - No token provided" });
+    return;
   }
 
   const token = authHeader.split(" ")[1];
@@ -24,7 +25,7 @@ export const authenticate = (
     req.user = decoded;
     next();
   } catch (error) {
-    return res
+    res
       .status(401)
       .json({ success: false, message: "Unauthorized - Invalid token" });
   }

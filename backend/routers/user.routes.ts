@@ -5,6 +5,7 @@ import {
   getUserById,
   updateUser,
 } from "../controllers/user.controller";
+import { authenticate } from "../middleware/auth";
 
 const userRouter = express.Router();
 
@@ -18,9 +19,9 @@ userRouter.get("/:userId", getUserById);
 userRouter.post("/signup", createUser);
 
 // Update a user’s profile
-userRouter.put("/:userId", updateUser);
+userRouter.put("/:userId", authenticate, updateUser);
 
 // Delete a user
-userRouter.delete("/:userId", deleteUser);
+userRouter.delete("/:userId", authenticate, deleteUser);
 
 export default userRouter;
