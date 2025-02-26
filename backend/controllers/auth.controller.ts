@@ -5,13 +5,13 @@ import { Request, Response } from "express";
 export const login = async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username }).select("+password"); //explicitly select password for comparison
     if (!user) {
       res.status(401).json({ success: false, message: "Invalid username" });
       return;
     }
 
-    const isMatch = await user.comparePassword(password).select('+password');//explicitly select password for comparison
+    const isMatch = await user.comparePassword(password);
     if (!isMatch) {
       res.status(401).json({ success: false, message: "Invalid password" });
       return;
