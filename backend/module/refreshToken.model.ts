@@ -1,11 +1,5 @@
-import mongoose, { Document, Schema } from "mongoose";
-
-interface IRefreshToken extends Document {
-  token: string;
-  user: mongoose.Types.ObjectId;
-  expiresAt: Date;
-  createdAt: Date;
-}
+import mongoose, { Schema } from "mongoose";
+import { IRefreshToken } from "../types/refreshToken.types.ts";
 
 const refreshTokenSchema = new Schema<IRefreshToken>({
   token: {
