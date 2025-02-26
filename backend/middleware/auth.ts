@@ -12,6 +12,7 @@ export const authenticate = (
     res
       .status(401)
       .json({ success: false, message: "Unauthorized - No token provided" });
+    return;
   }
 
   const token = authHeader?.split(" ")[1];
