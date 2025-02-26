@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 
 export const authenticate = (
@@ -9,18 +9,18 @@ export const authenticate = (
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    res
+    return res
       .status(401)
       .json({ success: false, message: "Unauthorized - No token provided" });
-    return;
   }
 
-  const token = authHeader?.split(" ")[1];
+  const token = authHeader.split(" ")[1];
   try {
     const decoded = jwt.verify(
-      token as string,
+      token,
       process.env.JWT_ACCESS_SECRET as string
-    );
+    ) as JwtPayload;
+
     req.user = decoded;
     next();
   } catch (error) {
