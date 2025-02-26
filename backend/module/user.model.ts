@@ -1,23 +1,6 @@
 import mongoose, { Model, Document } from "mongoose";
 import bcrypt from "bcrypt";
-
-// interface for the User document, because apparently ts can not get the password compare method without this
-interface IUser extends Document {
-  name: string;
-  lastName: string;
-  username: string;
-  gender: "male" | "female" | "non-binary" | "other" | "prefer-not-to-say";
-  email: string;
-  password: string;
-  photo: string;
-  moodEntries: mongoose.Types.ObjectId[];
-  chatHistory: mongoose.Types.ObjectId[];
-  preferences: mongoose.Types.ObjectId;
-  comparePassword(enteredPassword: string): Promise<boolean>;
-}
-
-// interface for the User model
-interface IUserModel extends Model<IUser> {}
+import { IUser, IUserModel } from "../types/user.types.ts";
 
 const userSchema = new mongoose.Schema<IUser>(
   {
@@ -73,6 +56,6 @@ userSchema.methods.comparePassword = async function (enteredPassword: string) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model<IUser, IUserModel>("User", userSchema);
 
 export default User;
