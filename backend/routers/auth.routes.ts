@@ -1,5 +1,5 @@
 import express from "express";
-import { login, logout } from "../controllers/auth.controller";
+import { login, logout, refreshToken } from "../controllers/auth.controller";
 
 const authRouter = express.Router();
 
@@ -7,7 +7,7 @@ const authRouter = express.Router();
 authRouter.post("/login", login);
 
 //refresh access token 
-authRouter.post("/refresh-token", )
+authRouter.post("/refresh-token", refreshToken)
 
 // User logout
 authRouter.post("/logout", logout);

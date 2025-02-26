@@ -99,9 +99,8 @@ export const refreshToken = async (req: Request, res: Response) => {
 
     const user = await User.findById(decoded.id);
     if (!user) {
-      return res
-        .status(401)
-        .json({ success: false, message: "User not found" });
+      res.status(401).json({ success: false, message: "User not found" });
+      return;
     }
 
     const accessToken = generateAccessToken(user);
