@@ -15,6 +15,6 @@ app.use("/auth", authRouter);
 app.use("/chat", chatAIRouter);
 app.use("/mood-entries", moodRouter);
 app.use("/preferences", preferencesRouter);
-app.use("/users", userRouter);
+app.use("/user", userRouter);
 
 export default app;

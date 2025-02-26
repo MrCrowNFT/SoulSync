@@ -15,7 +15,7 @@ userRouter.get("/");
 userRouter.get("/:userId", getUserById);
 
 // Create a new user
-userRouter.post("/", createUser);
+userRouter.post("/signup", createUser);
 
 // Update a user’s profile
 userRouter.put("/:userId", updateUser);
