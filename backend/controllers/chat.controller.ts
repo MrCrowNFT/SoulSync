@@ -35,7 +35,14 @@ export const getChatEntries = async (req: Request, res: Response) => {
       success: true,
       data: chatEntries,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.error("Error retrieving chat entries:", error);
+    res.status(500).json({
+      success: false,
+      error: "Internal server error",
+      details: error.message,
+    });
+  }
 };
 
 export const newChatEntry = async (req: Request, res: Response) => {
@@ -62,6 +69,7 @@ export const newChatEntry = async (req: Request, res: Response) => {
       userId: new mongoose.Types.ObjectId(userId as string),
       message: message,
       sender: sender,
+      //todo add metadata of included, should i make it required?
     });
 
     await newChatEntry.save();
@@ -77,4 +85,30 @@ export const newChatEntry = async (req: Request, res: Response) => {
 };
 
 //delete all entries for userId -> should only happen when user desire or when account is deleted
-export const deleteUserChatEntries = async (req: Request, res: Response) => {};
+export const deleteUserChatEntries = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+    if (!userId) {
+      res.status(400).json({ success: false, error: "userId is required" });
+      return;
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(userId as string)) {
+      res.status(400).json({ success: false, error: "Invalid userId format" });
+      return;
+    }
+
+    const deletedChatEntries = await ChatEntry.findOneAndUpdate({
+      userId: userId,
+    });
+
+    res.status(200).json({ success: true, data: deletedChatEntries });
+  } catch (error) {
+    console.error("Error deleting chat entries:", error);
+    res.status(500).json({
+      success: false,
+      error: "Internal server error",
+      details: error.message,
+    });
+  }
+};
