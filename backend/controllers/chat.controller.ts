@@ -2,9 +2,79 @@ import mongoose from "mongoose";
 import { Request, Response } from "express";
 import ChatEntry from "../module/chatEntry.model";
 
-export const getChatEntries = async (req: Request, res: Response) => {};
+export const getChatEntries = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+    if (!userId) {
+      res.status(400).json({ success: false, error: "userId is required" });
+      return;
+    }
 
-export const newChatHistory = async (req: Request, res: Response) => {};
+    if (!mongoose.Types.ObjectId.isValid(userId as string)) {
+      res.status(400).json({ success: false, error: "Invalid userId format" });
+      return;
+    }
+
+    const userIdObj = new mongoose.Types.ObjectId(userId as string);
+
+    const chatEntries = await ChatEntry.aggregate([
+      {
+        $match: { userId: userIdObj },
+      },
+    ]);
+
+    if (!chatEntries || chatEntries.length === 0) {
+      res.status(404).json({
+        success: false,
+        error: "No preferences found for this user",
+      });
+      return;
+    }
+    //probably will have to limit this in some way, other wise it'll be huge
+    res.status(200).json({
+      success: true,
+      data: chatEntries,
+    });
+  } catch (error) {}
+};
+
+export const newChatEntry = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+    const { message, sender, metadata } = req.query;
+
+    if (!userId) {
+      res.status(400).json({ success: false, error: "userId is required" });
+      return;
+    }
+    if (!message || !sender) {
+      res
+        .status(400)
+        .json({ success: false, error: "Message and sender are required" });
+      return;
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(userId as string)) {
+      res.status(400).json({ success: false, error: "Invalid userId format" });
+      return;
+    }
+    const newChatEntry = new ChatEntry({
+      userId: new mongoose.Types.ObjectId(userId as string),
+      message: message,
+      sender: sender,
+    });
+
+    await newChatEntry.save();
+    res.status(201).json({ success: true, data: newChatEntry });
+  } catch (error) {
+    console.error("Error saving chat entry:", error);
+    res.status(500).json({
+      success: false,
+      error: "Internal server error",
+      details: error.message,
+    });
+  }
+};
 
 //delete all entries for userId -> should only happen when user desire or when account is deleted
 export const deleteUserChatEntries = async (req: Request, res: Response) => {};
