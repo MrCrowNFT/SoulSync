@@ -11,4 +11,6 @@ chatAIRouter.post("/:userId", );
 // Delete chat history for a user
 chatAIRouter.delete("/:userId", );
 
+//an update route is not really necesary, isn't it?
+
 export default chatAIRouter;

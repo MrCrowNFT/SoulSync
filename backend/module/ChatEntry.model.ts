@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const chatHistorySchema = new mongoose.Schema(
+const chatEntrySchema = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -26,8 +26,8 @@ const chatHistorySchema = new mongoose.Schema(
 );
 
 // add an index on userId for faster queries
-chatHistorySchema.index({ userId: 1 });
+chatEntrySchema.index({ userId: 1 });
 
-const ChatHistory = mongoose.model("ChatHistory", chatHistorySchema);
+const ChatEntry = mongoose.model("ChatHistory", chatEntrySchema);
 
-export default ChatHistory;
+export default ChatEntry;
