@@ -26,10 +26,11 @@ export const getChatEntries = async (req: Request, res: Response) => {
       .limit(limit);
 
     if (!chatEntries || chatEntries.length === 0) {
-      return res.status(404).json({
+      res.status(404).json({
         success: false,
         error: "No chat entries found for this user",
       });
+      return
     }
     
     res.status(200).json({
