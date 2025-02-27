@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import mongoose from "mongoose";
 import Preferences from "../module/preferences.model.ts";
+import { toStringArray } from "../helpers/preferences.helpers.ts";
 
 export const createPreferences = async (req: Request, res: Response) => {
   try {
@@ -21,22 +22,6 @@ export const createPreferences = async (req: Request, res: Response) => {
     // New preferences object with only the userId initially
     const preferencesData: any = {
       userId,
-    };
-
-    // Helper function to process array fields
-    const toStringArray = (input: any): string[] => {
-      if (!input) return []; //handle empty fields
-
-      // Handle array input
-      if (Array.isArray(input)) {
-        return input
-          .map((item) => String(item).trim())
-          .filter((item) => item !== "");
-      }
-
-      // Handle single value
-      const str = String(input).trim();
-      return str ? [str] : [];
     };
 
     // Process each field
