@@ -65,6 +65,15 @@ export const newChatEntry = async (req: Request, res: Response) => {
       res.status(400).json({ success: false, error: "Invalid userId format" });
       return;
     }
+
+    //validate sender
+    if (sender !== 'user' && sender !== 'ai') {
+        return res.status(400).json({ 
+          success: false, 
+          error: "Sender must be either 'user' or 'ai'" 
+        });
+      }
+
     const newChatEntry = new ChatEntry({
       userId: new mongoose.Types.ObjectId(userId as string),
       message: message,
