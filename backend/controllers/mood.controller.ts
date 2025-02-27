@@ -72,7 +72,6 @@ export const newEntry = async (req: Request, res: Response) => {
 
     await newMoodEntry.save();
     res.status(201).json({ success: true, data: newMoodEntry });
-    return;
   } catch (error) {
     console.error("Error in newEntry:", error);
     res.status(500).json({
