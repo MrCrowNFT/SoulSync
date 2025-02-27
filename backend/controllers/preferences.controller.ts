@@ -164,10 +164,11 @@ export const updatePreferences = async (req: Request, res: Response) => {
 
     // if no fields provided
     if (!updateOperations.$addToSet) {
-      return res.status(400).json({
+      res.status(400).json({
         success: false,
         error: "No valid fields provided for update",
       });
+      return;
     }
 
     //update
@@ -176,6 +177,14 @@ export const updatePreferences = async (req: Request, res: Response) => {
       updateOperations,
       { new: true, runValidators: true, upsert: true } //upsert: true option so that if preferences don't exist for a user yet, they'll be created
     );
+
+    if (!updatedPreferences) {
+      res.status(400).json({
+        success: false,
+        error: "Failed to update preferences",
+      });
+      return;
+    }
 
     res.status(201).json({ success: true, data: updatedPreferences });
   } catch (error) {
@@ -188,4 +197,36 @@ export const updatePreferences = async (req: Request, res: Response) => {
   }
 };
 
+export const deletePreferences = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+    if (!userId) {
+      res.status(400).json({ success: false, error: "userId is required" });
+      return;
+    }
+    if (!mongoose.Types.ObjectId.isValid(userId as string)) {
+      res.status(400).json({ success: false, error: "Invalid userId format" });
+      return;
+    }
 
+    const deletedPreferences = await Preferences.findOneAndDelete({
+      userId: userId,
+    });
+    if (!deletedPreferences) {
+      res.status(400).json({
+        success: false,
+        error: "Preferences not found for this user",
+      });
+      return;
+    }
+
+    res.status(200).json({ success: true, data: deletedPreferences });
+  } catch (error) {
+    console.error("Error in deleting preferences:", error);
+    res.status(500).json({
+      success: false,
+      error: "Internal server error",
+      details: error.message,
+    });
+  }
+};
