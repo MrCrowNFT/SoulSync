@@ -17,23 +17,29 @@ export const getChatEntries = async (req: Request, res: Response) => {
 
     const userIdObj = new mongoose.Types.ObjectId(userId as string);
 
-    const chatEntries = await ChatEntry.aggregate([
-      {
-        $match: { userId: userIdObj },
-      },
-    ]);
+    const limit = parseInt(req.query.limit as string) || 100; // Default limit to 100 entries -> up for change
+    const skip = parseInt(req.query.skip as string) || 0;
+
+    const chatEntries = await ChatEntry.find({ userId: userIdObj })
+      .sort({ createdAt: -1 }) // most recent first
+      .skip(skip)
+      .limit(limit);
 
     if (!chatEntries || chatEntries.length === 0) {
-      res.status(404).json({
+      return res.status(404).json({
         success: false,
-        error: "No chat entry found for this user",
+        error: "No chat entries found for this user",
       });
-      return;
     }
-    //probably will have to limit this in some way, other wise it'll be huge
+    
     res.status(200).json({
       success: true,
       data: chatEntries,
+      pagination: {
+        limit,
+        skip,
+        hasMore: chatEntries.length === limit
+      }
     });
   } catch (error) {
     console.error("Error retrieving chat entries:", error);
@@ -68,10 +74,11 @@ export const newChatEntry = async (req: Request, res: Response) => {
 
     //validate sender
     if (sender !== 'user' && sender !== 'ai') {
-        return res.status(400).json({ 
+        res.status(400).json({ 
           success: false, 
           error: "Sender must be either 'user' or 'ai'" 
         });
+        return
       }
 
     const newChatEntry = new ChatEntry({
@@ -121,3 +128,4 @@ export const deleteChatEntries = async (req: Request, res: Response) => {
     });
   }
 };
+
