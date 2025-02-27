@@ -26,7 +26,7 @@ export const getChatEntries = async (req: Request, res: Response) => {
     if (!chatEntries || chatEntries.length === 0) {
       res.status(404).json({
         success: false,
-        error: "No preferences found for this user",
+        error: "No chat entry found for this user",
       });
       return;
     }
@@ -48,7 +48,7 @@ export const getChatEntries = async (req: Request, res: Response) => {
 export const newChatEntry = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
-    const { message, sender, metadata } = req.query;
+    const { message, sender, metadata } = req.body;
 
     if (!userId) {
       res.status(400).json({ success: false, error: "userId is required" });
@@ -69,7 +69,7 @@ export const newChatEntry = async (req: Request, res: Response) => {
       userId: new mongoose.Types.ObjectId(userId as string),
       message: message,
       sender: sender,
-      //todo add metadata of included, should i make it required?
+      metadata: metadata || {},
     });
 
     await newChatEntry.save();
@@ -98,7 +98,7 @@ export const deleteChatEntries = async (req: Request, res: Response) => {
       return;
     }
 
-    const deletedChatEntries = await ChatEntry.findOneAndUpdate({
+    const deletedChatEntries = await ChatEntry.deleteMany({
       userId: userId,
     });
 
