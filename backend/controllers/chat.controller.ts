@@ -85,7 +85,7 @@ export const newChatEntry = async (req: Request, res: Response) => {
 };
 
 //delete all entries for userId -> should only happen when user desire or when account is deleted
-export const deleteUserChatEntries = async (req: Request, res: Response) => {
+export const deleteChatEntries = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
     if (!userId) {
