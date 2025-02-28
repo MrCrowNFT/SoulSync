@@ -40,11 +40,13 @@ Goal: Set up the project and build the mood tracking feature.
 
 - Build the mood tracking UI (e.g., emoji picker ).✅
 
-- Set up the backend (Node.js/Express).
+- Set up the backend (Node.js/Express).✅
 
-- Create an API endpoint to save mood data to the database.
+- Create an API endpoint to save mood data, chat, preferences and user info to the database.✅
 
-- Test the mood tracking feature on mobile and web.
+- Test the mood tracking feature on web.
+
+- Frontend API calls
 
 #### Deliverables:
 
@@ -52,7 +54,7 @@ Goal: Set up the project and build the mood tracking feature.
 
 - API endpoint to save mood data (backend).
 
-- Basic database setup.
+- Basic database setup.✅
 
 ### Sprint 2: AI Chatbot Integration
 
@@ -62,13 +64,13 @@ Goal: Integrate the AI chatbot and enable real-time conversations.
 
 - Set up OpenAI GPT-4 API (get API key, test prompts).
 
-- Build the chatbot UI (input box, chat bubbles).
+- Build the chatbot UI (input box, chat bubbles).✅
 
 - Create an API endpoint to send user messages to OpenAI and receive responses.
 
 - Implement real-time updates for the chat interface.
 
-- Test the chatbot on mobile and web.
+- Test the chatbot on web.
 
 #### Deliverables:
 
@@ -196,12 +198,13 @@ Goal: Test the app, fix bugs, and deploy it.
 
 - Day 5-7: Final testing and polish.
 
-## Post-MVP: Mobile App 
+## Post-MVP: Mobile App
 
 - React Native for Web: Reuse your React components in a React Native app.
 - Capacitor: Wrap your web app in a native mobile container.
 
 ## Color Palet (Subject to change):
+
 - #6C9BCF
 - #A2D9A6
 - #333333 Text color
