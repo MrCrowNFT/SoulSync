@@ -1,13 +1,24 @@
-// types for the login parameters
-export interface LoginParams {
-    username: string;
-    password: string;
+import axios from "axios";
+import { LoginParams, LoginResponse } from "../types/Login.ts";
+
+export const loginRequest = async ({ username, password }: LoginParams) => {
+  try {
+    const res = await axios.post<LoginResponse>(
+      "http://localhost:5500/auth/login",
+      {
+        username,
+        password,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log("Login response:", res.data); //->for debugging
+    return res.data;
+  } catch (error) {
+    console.log("Full error:", error); // log full error object
+    throw error;
   }
-  
-  // response type from API
-  export interface LoginResponse {
-    success: boolean;
-    message: string;
-    accessToken: string;
-    refreshToken: string;
-  }
+};
