@@ -4,7 +4,7 @@ import { useAuth } from "../hooks/useAuth";
 const LoginModal = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { login, error, isLoading, isSuccess } = useAuth();
+  const { login, error, isLoading } = useAuth();
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -72,8 +72,9 @@ const LoginModal = () => {
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent 
                         text-sm font-semibold font-mono rounded-lg text-white bg-blue-600 hover:bg-blue-700 
                         dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors duration-200 cursor-pointer"
+              disabled={isLoading}
             >
-              Log in
+              {isLoading ? "Logging in..." : "Login"}
             </button>
           </div>
         </form>
