@@ -2,20 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 
-// types for the login parameters
-interface LoginParams {
-  username: string;
-  password: string;
-}
-
-// response type from API
-interface LoginResponse {
-  success: boolean;
-  message: string;
-  accessToken: string;
-  refreshToken: string;
-}
-
 const LoginModal = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
