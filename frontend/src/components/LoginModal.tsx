@@ -1,58 +1,9 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useMutation } from "@tanstack/react-query";
 
 const LoginModal = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-
-  const loginRequest = async ({ username, password }: LoginParams) => {
-    try {
-      const res = await axios.post<LoginResponse>(
-        "http://localhost:5500/auth/login",
-        {
-          username,
-          password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log("Login response:", res.data); //->for debugging
-      return res.data;
-    } catch (error) {
-      console.log("Full error:", error); // log full error object
-      throw error;
-    }
-  };
-
-  const loginMutation = useMutation({
-    mutationFn: loginRequest,
-    onSuccess: (data: LoginResponse) => {
-      //check status code
-      if (data.success) {
-        localStorage.setItem("accessToken", data.accessToken);
-        localStorage.setItem("refreshToken", data.refreshToken);
-        setError(null);
-        //todo: navigate the user or update UI state here
-      } else {
-        // in case API returns success: false but doesn't throw an error
-        setError(data.message || "Login failed");
-      }
-    },
-    onError: (error) => {
-      console.error("Login error:", error);
-      // type check the error object
-      if (axios.isAxiosError(error) && error.response?.data) {
-        setError(error.response.data.message || "Login failed");
-      } else {
-        setError("An unexpected error occurred");
-      }
-    },
-  });
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
