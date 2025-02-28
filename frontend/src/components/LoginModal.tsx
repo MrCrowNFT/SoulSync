@@ -1,9 +1,32 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const LoginModal = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+
+  const loginRequest = async ({ username, password }) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:5500/auth/login",
+        {
+          username,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("Login response:", res.data); //->for debugging
+      return res;
+    } catch (error) {
+      console.log("Full error:", error); // log full error object
+      throw error;
+    }
+  };
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
