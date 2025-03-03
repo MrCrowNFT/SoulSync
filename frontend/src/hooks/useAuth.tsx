@@ -64,6 +64,8 @@ export const useAuth = () => {
     mutationFn: logoutRequest,
     onSuccess: (data: LogoutResponse) => {
       if (data.success) {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
         setError(null);
       } else {
         setError(data.message || "Failed to logout");
