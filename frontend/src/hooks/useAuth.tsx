@@ -41,7 +41,7 @@ export const useAuth = () => {
   const refreshTokenMutation = useMutation({
     mutationFn: refreshTokenRequest,
     onSuccess: (data: RefreshTokenResponse) => {
-      if (data.success) {
+      if (data.success && data.accessToken) {
         localStorage.setItem("accessToken", data.accessToken);
         setError(null);
       } else {
