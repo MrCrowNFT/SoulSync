@@ -17,3 +17,8 @@ export interface RefreshTokenResponse {
   accessToken?: string;
   message?: string;
 }
+
+export interface LogoutResponse{
+  success: boolean;
+  message: string;
+}
