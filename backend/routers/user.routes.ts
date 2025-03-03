@@ -10,7 +10,7 @@ import { authenticate } from "../middleware/auth";
 const userRouter = express.Router();
 
 // Fetch all users, probably make this admin only, -> do i even need this
-userRouter.get("/");
+//userRouter.get("/");
 
 // Fetch a specific user -> do i even need this?Yes, for getting info about the user for the ai
 userRouter.get("/:userId", getUserById);

@@ -1,12 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
-import { loginRequest } from "../api/auth";
-import { LoginParams, LoginResponse } from "../types/Login";
+import { loginRequest, refreshTokenRequest } from "../api/auth";
+import { LoginParams, LoginResponse } from "../types/Auth";
 
 export const useAuth = () => {
   const [error, setError] = useState<string | null>(null);
 
+  //Login Logic
   const loginMutation = useMutation({
     mutationFn: loginRequest,
     onSuccess: (data: LoginResponse) => {
@@ -35,6 +36,15 @@ export const useAuth = () => {
   const login = (credentials: LoginParams) => {
     loginMutation.mutate(credentials);
   };
+
+  //Refresh token logic
+  const refreshTokenMutation= useMutation({
+    mutationFn: refreshTokenRequest,
+    onSuccess:,
+    onError:,
+  })
+
+  //Logout logic
 
   return {
     login,
