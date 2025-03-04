@@ -14,7 +14,7 @@ export const signupRequest = async ({
 }: UserSignupInput) => {
   try {
     const res = await axios.post<SignupRequestResponse>(
-      "http://localhost:5500/auth/login",
+      "http://localhost:5500/user/signup",
       {
         name,
         lastName,
