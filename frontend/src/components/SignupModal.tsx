@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { UserSignupInput, validateSignup } from "../types/User";
+import { useUser } from "../hooks/useUser";
 
 const SignupModal = () => {
   const [formData, setFormData] = useState<UserSignupInput>({
@@ -12,11 +13,13 @@ const SignupModal = () => {
     gender: "prefer-not-to-say",
     photo: "", // can be left empty
   });
-  const [error, setError] = useState<string | null>(null);
+  
   const [fieldErrors, setFieldErrors] = useState<
     Partial<Record<keyof UserSignupInput, string>>
   >({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Replace local error and isSubmitting states with useUser hook
+  const { signup, error, setError, isLoading } = useUser();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -39,25 +42,17 @@ const SignupModal = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
-    setIsSubmitting(true);
 
     // Validate form data
     const { isValid, errors } = validateSignup(formData);
 
     if (!isValid) {
       setFieldErrors(errors);
-      setIsSubmitting(false);
       return;
     }
 
-    try {
-      //here goes the API call
-    } catch (error) {
-      setError("An unexpected error occurred. Please try again.");
-      console.error("Signup error", error);
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Use the signup method from useUser hook
+    signup(formData);
   };
 
   return (
@@ -256,13 +251,13 @@ const SignupModal = () => {
           <div className="pt-4">
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isLoading}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent 
                           text-sm font-semibold font-mono rounded-lg text-white bg-blue-600 hover:bg-blue-700 
                           dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors duration-200 cursor-pointer
                           disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? "Creating Account..." : "Create Account"}
+              {isLoading ? "Creating Account..." : "Create Account"}
             </button>
           </div>
         </form>
