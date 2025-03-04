@@ -12,7 +12,31 @@ export const signupRequest = async ({
   gender,
   photo,
 }: UserSignupInput) => {
-
+  try {
+    const res = await axios.post<>(
+      "http://localhost:5500/auth/login",
+      {
+        name,
+        lastName,
+        email,
+        username,
+        password,
+        birthDate,
+        gender,
+        photo,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log("Signup response:", res.data); //->for debugging
+    return res.data;
+  } catch (error) {
+    console.log("Full error:", error); // log full error object
+    throw error;
+  }
 };
 
 //Update profile api call
