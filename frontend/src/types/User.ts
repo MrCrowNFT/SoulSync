@@ -79,7 +79,7 @@ export function validateSignup(input: UserSignupInput): { isValid: boolean; erro
   };
 }
 
-export interface SignupRequestResponse {
+export interface SignupResponse {
   success: boolean;
   message: string;
   data: {

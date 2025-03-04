@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UserSignupInput, SignupRequestResponse } from "../types/User.ts";
+import { UserSignupInput, SignupResponse } from "../types/User.ts";
 
 //Signup api call
 export const signupRequest = async ({
@@ -13,7 +13,7 @@ export const signupRequest = async ({
   photo,
 }: UserSignupInput) => {
   try {
-    const res = await axios.post<SignupRequestResponse>(
+    const res = await axios.post<SignupResponse>(
       "http://localhost:5500/user/signup",
       {
         name,
