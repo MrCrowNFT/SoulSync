@@ -78,3 +78,18 @@ export function validateSignup(input: UserSignupInput): { isValid: boolean; erro
     errors
   };
 }
+
+export interface SignupRequestResponse {
+  success: boolean;
+  message: string;
+  data: {
+    _id: string;
+    name: string;
+    lastName: string;
+    username: string;
+    gender: 'male' | 'female' | 'non-binary' | 'other' | 'prefer-not-to-say';
+    email: string;
+    photo?: string;
+    birthDate: string;
+  };
+}
