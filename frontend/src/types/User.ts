@@ -4,6 +4,19 @@ export type UserProfile = {
   photo: string;
 };
 
-export interface UserCardProps{
+export interface UserCardProps {
   user: UserProfile;
+}
+
+//New user profile
+//todo: replace the old one
+export interface User{
+  firstName: string,
+  lastName: string,
+  email: string,
+  username: string,
+  password: string,
+  confirmPassword: string,
+  birthDate: string,
+  gender: string,
 }

@@ -12,13 +12,24 @@ const userSchema = new mongoose.Schema<IUser>(
       required: true,
       enum: ["male", "female", "non-binary", "other", "prefer-not-to-say"],
     },
+    birthDate: {
+      type: Date,
+      required: true,
+      validate: {
+        validator: function(value: Date) {
+          // Ensure birth date is not in the future
+          return value < new Date();
+        },
+        message: 'Birth date cannot be in the future'
+      }
+    },
     email: {
       type: String,
       required: true,
       unique: true,
       match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // email validation
     },
-    password: { type: String, required: true, select: false }, // Hide by default to prevent exposing it, though it doesn't really matter because is encrypted,but whatever
+    password: { type: String, required: true, select: false }, 
     photo: { type: String, default: "" },
     moodEntries: [
       {
