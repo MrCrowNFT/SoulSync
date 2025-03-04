@@ -1,17 +1,23 @@
 import React, { useState } from "react";
+import { UserSignupInput, validateSignup } from "../types/User";
 
 const SignupModal = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
+  const [formData, setFormData] = useState<UserSignupInput>({
+    name: "",
     lastName: "",
     email: "",
     username: "",
     password: "",
     confirmPassword: "",
     birthDate: "",
-    gender: "",
+    gender: "prefer-not-to-say",
+    photo: "", // can be left empty
   });
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<
+    Partial<Record<keyof UserSignupInput, string>>
+  >({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -21,10 +27,38 @@ const SignupModal = () => {
       ...prevState,
       [name]: value,
     }));
+
+    // Clear specific field error when user starts typing
+    if (fieldErrors[name as keyof UserSignupInput]) {
+      setFieldErrors((prev) => ({
+        ...prev,
+        [name]: undefined,
+      }));
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null);
+    setIsSubmitting(true);
+
+    // Validate form data
+    const { isValid, errors } = validateSignup(formData);
+
+    if (!isValid) {
+      setFieldErrors(errors);
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      //here goes the API call
+    } catch (error) {
+      setError("An unexpected error occurred. Please try again.");
+      console.error("Signup error", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -46,22 +80,25 @@ const SignupModal = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label
-                htmlFor="firstName"
+                htmlFor="name"
                 className="block text-sm font-medium font-mono text-gray-700 dark:text-gray-300 mb-1"
               >
                 First Name
               </label>
               <input
-                id="firstName"
-                name="firstName"
+                id="name"
+                name="name"
                 type="text"
                 required
-                value={formData.firstName}
+                value={formData.name}
                 onChange={handleChange}
                 className="appearance-none relative block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 
                             placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none 
                             focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-700 transition-colors duration-300"
               />
+              {fieldErrors.name && (
+                <p className="text-red-500 text-xs mt-1">{fieldErrors.name}</p>
+              )}
             </div>
 
             <div>
@@ -82,6 +119,11 @@ const SignupModal = () => {
                             placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none 
                             focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-700 transition-colors duration-300"
               />
+              {fieldErrors.lastName && (
+                <p className="text-red-500 text-xs mt-1">
+                  {fieldErrors.lastName}
+                </p>
+              )}
             </div>
           </div>
 
@@ -103,6 +145,9 @@ const SignupModal = () => {
                           placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none 
                           focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-700 transition-colors duration-300"
             />
+            {fieldErrors.email && (
+              <p className="text-red-500 text-xs mt-1">{fieldErrors.email}</p>
+            )}
           </div>
 
           <div>
@@ -123,6 +168,11 @@ const SignupModal = () => {
                           placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none 
                           focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-700 transition-colors duration-300"
             />
+            {fieldErrors.username && (
+              <p className="text-red-500 text-xs mt-1">
+                {fieldErrors.username}
+              </p>
+            )}
           </div>
 
           <div>
@@ -143,6 +193,11 @@ const SignupModal = () => {
                           placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none 
                           focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-700 transition-colors duration-300"
             />
+            {fieldErrors.birthDate && (
+              <p className="text-red-500 text-xs mt-1">
+                {fieldErrors.birthDate}
+              </p>
+            )}
           </div>
 
           <div>
@@ -169,6 +224,9 @@ const SignupModal = () => {
               <option value="other">Other</option>
               <option value="prefer-not-to-say">Prefer not to say</option>
             </select>
+            {fieldErrors.gender && (
+              <p className="text-red-500 text-xs mt-1">{fieldErrors.gender}</p>
+            )}
           </div>
 
           <div>
@@ -189,6 +247,11 @@ const SignupModal = () => {
                           placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none 
                           focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-700 transition-colors duration-300"
             />
+            {fieldErrors.password && (
+              <p className="text-red-500 text-xs mt-1">
+                {fieldErrors.password}
+              </p>
+            )}
           </div>
 
           <div>
@@ -209,16 +272,23 @@ const SignupModal = () => {
                           placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none 
                           focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-700 transition-colors duration-300"
             />
+            {fieldErrors.confirmPassword && (
+              <p className="text-red-500 text-xs mt-1">
+                {fieldErrors.confirmPassword}
+              </p>
+            )}
           </div>
 
           <div className="pt-4">
             <button
               type="submit"
+              disabled={isSubmitting}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent 
                           text-sm font-semibold font-mono rounded-lg text-white bg-blue-600 hover:bg-blue-700 
-                          dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors duration-200 cursor-pointer"
+                          dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors duration-200 cursor-pointer
+                          disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Create Account
+              {isSubmitting ? "Creating Account..." : "Create Account"}
             </button>
           </div>
         </form>
