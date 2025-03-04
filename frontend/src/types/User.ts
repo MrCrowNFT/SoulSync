@@ -17,7 +17,6 @@ export interface UserSignupInput {
   gender: 'male' | 'female' | 'non-binary' | 'other' | 'prefer-not-to-say';
   email: string;
   password: string;
-  confirmPassword: string; // Added for password confirmation
   photo?: string; // Optional profile photo
   birthDate: string; // Date as ISO string (YYYY-MM-DD)
 }
@@ -56,11 +55,6 @@ export function validateSignup(input: UserSignupInput): { isValid: boolean; erro
   // Password validation
   if (!input.password || input.password.length < 8) {
     errors.password = "Password must be at least 8 characters long";
-  }
-
-  // Confirm password validation
-  if (input.password !== input.confirmPassword) {
-    errors.confirmPassword = "Passwords do not match";
   }
 
   // Birth date validation

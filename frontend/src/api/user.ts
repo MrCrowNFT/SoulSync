@@ -8,12 +8,11 @@ export const signupRequest = async ({
   email,
   username,
   password,
-  confirmPassword,
   birthDate,
   gender,
   photo,
 }: UserSignupInput) => {
-    
+
 };
 
 //Update profile api call
