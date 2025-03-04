@@ -8,7 +8,6 @@ const SignupModal = () => {
     email: "",
     username: "",
     password: "",
-    confirmPassword: "",
     birthDate: "",
     gender: "prefer-not-to-say",
     photo: "", // can be left empty
@@ -250,31 +249,6 @@ const SignupModal = () => {
             {fieldErrors.password && (
               <p className="text-red-500 text-xs mt-1">
                 {fieldErrors.password}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <label
-              htmlFor="confirmPassword"
-              className="block text-sm font-medium font-mono text-gray-700 dark:text-gray-300 mb-1"
-            >
-              Confirm Password
-            </label>
-            <input
-              id="confirmPassword"
-              name="confirmPassword"
-              type="password"
-              required
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              className="appearance-none relative block w-full px-4 py-2 border border-gray-300 dark:border-gray-600 
-                          placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none 
-                          focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm bg-white dark:bg-gray-700 transition-colors duration-300"
-            />
-            {fieldErrors.confirmPassword && (
-              <p className="text-red-500 text-xs mt-1">
-                {fieldErrors.confirmPassword}
               </p>
             )}
           </div>
