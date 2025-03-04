@@ -36,15 +36,41 @@ export const getUserById = async (req: Request, res: Response) => {
 //Create user
 export const createUser = async (req: Request, res: Response) => {
   try {
-    const { name, lastName, username, gender, email, password, photo } =
-      req.body;
+    const {
+      name,
+      lastName,
+      username,
+      gender,
+      email,
+      password,
+      photo,
+      birthDate,
+    } = req.body;
 
     // required fields
-    if (!name || !lastName || !username || !gender || !email || !password) {
+    if (
+      !name ||
+      !lastName ||
+      !username ||
+      !gender ||
+      !email ||
+      !password ||
+      !birthDate
+    ) {
       res.status(400).json({
         success: false,
         message:
-          "Name, lastName, username, gender, email and password are required.",
+          "Name, lastName, username, gender, email, password, and birthDate are required.",
+      });
+      return;
+    }
+
+    // Validate birthDate
+    const parsedBirthDate = new Date(birthDate);
+    if (isNaN(parsedBirthDate.getTime())) {
+      res.status(400).json({
+        success: false,
+        message: "Invalid birth date format.",
       });
       return;
     }
@@ -77,6 +103,7 @@ export const createUser = async (req: Request, res: Response) => {
       email,
       password, // this will be hashed by the pre-save hook
       photo,
+      birthDate: parsedBirthDate,
     });
 
     await newUser.save();
@@ -93,6 +120,7 @@ export const createUser = async (req: Request, res: Response) => {
         gender: newUser.gender,
         email: newUser.email,
         photo: newUser.photo,
+        birthDate: newUser.birthDate,
       },
     });
   } catch (error) {
@@ -100,7 +128,7 @@ export const createUser = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       error: "Internal server error",
-      details: error.message,
+      details: error instanceof Error ? error.message : "Unknown error",
     });
   }
 };
@@ -109,7 +137,8 @@ export const createUser = async (req: Request, res: Response) => {
 export const updateUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
-    const { name, lastName, username, gender, email, photo } = req.body;
+    const { name, lastName, username, gender, email, photo, birthDate } =
+      req.body;
 
     if (!userId) {
       res.status(400).json({ success: false, message: "User ID is required." });
@@ -127,6 +156,19 @@ export const updateUser = async (req: Request, res: Response) => {
     if (!user) {
       res.status(404).json({ success: false, message: "User not found." });
       return;
+    }
+
+    // Validate birthDate if provided
+    let parsedBirthDate: Date | undefined;
+    if (birthDate) {
+      parsedBirthDate = new Date(birthDate);
+      if (isNaN(parsedBirthDate.getTime())) {
+        res.status(400).json({
+          success: false,
+          message: "Invalid birth date format.",
+        });
+        return;
+      }
     }
 
     // check username or email already exists but excluding the current user
@@ -157,6 +199,7 @@ export const updateUser = async (req: Request, res: Response) => {
     if (gender) user.gender = gender;
     if (email) user.email = email;
     if (photo) user.photo = photo;
+    if (parsedBirthDate) user.birthDate = parsedBirthDate;
 
     await user.save();
 
@@ -171,6 +214,7 @@ export const updateUser = async (req: Request, res: Response) => {
         gender: user.gender,
         email: user.email,
         photo: user.photo,
+        birthDate: user.birthDate,
       },
     });
   } catch (error) {
@@ -178,7 +222,7 @@ export const updateUser = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       error: "Internal server error",
-      details: error.message,
+      details: error instanceof Error ? error.message : "Unknown error",
     });
   }
 };
