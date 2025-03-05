@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { UserSignupInput, validateSignup } from "../types/User";
-import { useUser } from "../hooks/useUser";
+import { UserSignupInput, validateSignup } from "../../types/User";
+import { useUser } from "../../hooks/useUser";
 
 const SignupModal = () => {
   const [formData, setFormData] = useState<UserSignupInput>({
@@ -13,7 +13,7 @@ const SignupModal = () => {
     gender: "prefer-not-to-say",
     photo: "", // can be left empty
   });
-  
+
   const [fieldErrors, setFieldErrors] = useState<
     Partial<Record<keyof UserSignupInput, string>>
   >({});

@@ -1,6 +1,6 @@
-import { TestimonySectionProps } from "../types/Testimony";
+import { TestimonySectionProps } from "../../types/Testimony";
 import { FunctionComponent } from "react";
-import TestimonyCard from "./TestimonyCard";
+import TestimonyCard from "../TestimonyCard";
 
 const TestimonySection: FunctionComponent<TestimonySectionProps> = ({
   testimonies,

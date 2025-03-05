@@ -10,7 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import { FunctionComponent, useEffect, useState } from "react";
-import { LineProp } from "../types/Graph.ts";
+import { LineProp } from "../../types/Graph.ts";
 
 // Register Chart.js components
 Chart.register(
@@ -69,7 +69,9 @@ const MoodGraph: FunctionComponent<LineProp> = ({ data }) => {
     scales: {
       x: {
         grid: {
-          color: isDarkMode ? darkModeStyles.borderColor : lightModeStyles.borderColor,
+          color: isDarkMode
+            ? darkModeStyles.borderColor
+            : lightModeStyles.borderColor,
         },
         ticks: {
           color: isDarkMode ? darkModeStyles.color : lightModeStyles.color,
@@ -77,7 +79,9 @@ const MoodGraph: FunctionComponent<LineProp> = ({ data }) => {
       },
       y: {
         grid: {
-          color: isDarkMode ? darkModeStyles.borderColor : lightModeStyles.borderColor,
+          color: isDarkMode
+            ? darkModeStyles.borderColor
+            : lightModeStyles.borderColor,
         },
         ticks: {
           color: isDarkMode ? darkModeStyles.color : lightModeStyles.color,
@@ -101,7 +105,9 @@ const MoodGraph: FunctionComponent<LineProp> = ({ data }) => {
     datasets: data.data.datasets.map((dataset) => ({
       ...dataset,
       borderColor: isDarkMode ? "#3b82f6" : "#2563eb", // Adjust line color for dark mode
-      backgroundColor: isDarkMode ? "rgba(59, 130, 246, 0.2)" : "rgba(37, 99, 235, 0.2)", // Adjust fill color for dark mode
+      backgroundColor: isDarkMode
+        ? "rgba(59, 130, 246, 0.2)"
+        : "rgba(37, 99, 235, 0.2)", // Adjust fill color for dark mode
     })),
   };
 

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import DarkModeToggle from "./DarkModeToggle";
+import DarkModeToggle from "../common/DarkModeToggle";
 
 const Navbar = () => {
   return (
